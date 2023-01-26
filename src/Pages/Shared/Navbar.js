@@ -42,9 +42,9 @@ const Navbar = () => {
             </ul>
           </div>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-xl italic font-bold text-primary">Mountain</Link>
+          <Link to='/' className="btn btn-ghost normal-case text-2xl italic font-extrabold text-primary">Mountain</Link>
         <div className="navbar-end">
-          <Link to='' className="btn">Get started</Link>
+          <Link to='' className="btn btn-sm">Login</Link>
         </div>
       </div>
         </div>
