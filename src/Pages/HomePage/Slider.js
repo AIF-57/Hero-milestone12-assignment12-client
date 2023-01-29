@@ -25,10 +25,10 @@ const Slider = () => {
           spaceBetween={0}
           effect={"fade"}
           centeredSlides={true}
-          // autoplay={{
-          //   delay: 5000,
-          //   disableOnInteraction: false,
-          // }}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
           pagination={{
             clickable: true,
           }}
@@ -41,7 +41,7 @@ const Slider = () => {
               <div className="sliderContents h-full text-3xl lg:text-5xl font-bold">
                 <div className="imgArea h-full w-full relative">
                   <img src={sliderImg3} alt="" />
-                    <div className="title absolute top-[20%] left-[5%]">
+                    <div className="title absolute w-1/2 top-[20%] left-[5%] text-left">
                       <p className='text-base-100'>BOOST YOUR</p>
                       <p className='text-neutral'>RIDE</p>    
                     </div>
@@ -50,11 +50,11 @@ const Slider = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="sliderContainer w-full h-full">
+            <div className="sliderContainer w-full h-full relative">
               <div className="sliderContents h-full text-3xl lg:text-7xl font-bold">
-                <div className="imgArea h-full w-full relative">
+                <div className="imgArea h-full w-full">
                   <img src={sliderImg} alt="" />
-                    <div className="title absolute top-[50%] left-[30%]">
+                    <div className="title absolute left-[25%] top-[50%] w-1/2">
                       <p className='text-base-100'>GO ALL WAYS</p>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ const Slider = () => {
             <div className="sliderContents h-full text-3xl lg:text-7xl font-bold">
               <div className="imgArea h-full w-full relative">
                   <img src={sliderImg2} alt="" />
-                  <div className="title absolute top-[40%] left-[30%] text-base-100">
+                  <div className="title absolute left-[25%] top-[40%] w-1/2 text-base-100">
                     <p>THIS SHIFTS</p>
                     <p className='my-2'>EVERYTHING</p>  
                   </div>
