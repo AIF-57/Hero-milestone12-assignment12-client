@@ -6,8 +6,8 @@ const Footer = () => {
     return (
       <div>
         <div className='subFooter bg-secondary'>
-          <footer className="footer max-w-[1280px] mx-auto px-5 py-10 text-white grid grid-cols-1 lg:grid-cols-11">
-            <div className='lg:col-span-5'>
+          <footer className="footer max-w-[1280px] mx-auto px-20 py-20 text-white grid grid-cols-1 lg:grid-cols-12">
+            <div className='lg:col-span-6'>
             <Link to='/' className="btn btn-ghost normal-case text-2xl italic font-extrabold text-base-100 ">Mountain</Link>
             </div> 
             <div className='text-xs'>
@@ -48,7 +48,7 @@ const Footer = () => {
         </div>
 
         <div className="bottomFooter bg-[#252626]">
-          <footer className="footer max-w-[1280px] mx-auto p-4 text-neutral-content">
+          <footer className="footer max-w-[1280px] mx-auto py-4 px-20 text-neutral-content">
             <div className="text-gray-300 text-[10px] font-semibold ">
               <p>© {year} MOUNTAIN LLC. ALL RIGHTS RESERVED.</p>
             </div> 
