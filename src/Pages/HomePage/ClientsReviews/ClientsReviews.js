@@ -28,7 +28,6 @@ const ClientsReviews = () => {
           </div>
           <p className='text-5xl font-bold'>Testimonials</p>
         </div>
-        <h2>Center Mode</h2>
         <Slider {...settings} className='my-20'>
           <div className='border'>
             <h3>1</h3>

@@ -38,7 +38,7 @@ const Slider = () => {
         >
           <SwiperSlide>
             <div className="sliderContainer w-full h-full">
-              <div className="sliderContents h-full text-3xl lg:text-5xl font-bold">
+              <div className="sliderContents h-full text-3xl lg:text-7xl font-bold">
                 <div className="imgArea h-full w-full relative">
                   <img src={sliderImg3} alt="" />
                     <div className="title absolute w-1/2 top-[20%] left-[5%] text-left">

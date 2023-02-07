@@ -47,11 +47,11 @@ const Login = () => {
             style={{background:`url(${form_bg})`,backgroundSize:'cover', backgroundPosition:'center'}}
         >
             <div className="loginArea w-[320px] mx-auto shadow-xl">
-                <div className="logo bg-[#cccccc] h-32 flex items-center justify-center rounded-t-md">
+                <div className="logo bg-[#cccccc] h-32 flex items-center justify-center rounded-sm">
                     <p className="text-xl italic font-extrabold text-base-100 bg-primary inline-block p-4">Mountain</p>
                 </div>
 
-                <div className="bg-base-100 rounded-b-md">
+                <div className="bg-base-100 rounded-b-sm">
 
                     <div className="formBtn flex justify-around text-accent border-b mb-5">
                       <button onClick={()=>{setSignUpBtn(!signUpBtn)}} className={`btn-ghost w-full py-3 hover:bg-base-100  text-sm ${!signUpBtn && 'border-b-neutral hover:border-b-neutral text-neutral font-semibold'}`}>Log In</button>
@@ -59,7 +59,7 @@ const Login = () => {
                     </div>
 
 
-                    <button onClick={()=>signInWithGoogle()} className="btn w-[90%] bg-transparent border-gray-300 rounded-md hover:bg-gray-100 hover:border-gray-300 text-accent justify-start capitalize min-h-[2.6rem] h-[2.6rem]">
+                    <button onClick={()=>signInWithGoogle()} className="btn w-[90%] bg-transparent border-gray-300 rounded-sm hover:bg-gray-100 hover:border-gray-300 text-accent justify-start capitalize min-h-[2.6rem] h-[2.6rem]">
                     <img src={google} alt="" width={22} className='mr-8'/>
                     <p>Sign in with Google</p>
                     </button>
@@ -67,7 +67,7 @@ const Login = () => {
                       (gError && <span className='text-red-600 text-xs font-semibold'>{gError?.message}</span>)
                     }
 
-                    <button onClick={()=>signInWithFacebook()} className="btn w-[90%] bg-[#3b5998] border-none rounded-md hover:bg-[#2f477a] hover:border-gray-300 text-base-100 justify-start capitalize mt-4 mb-5 min-h-[2.6rem] h-[2.6rem]">
+                    <button onClick={()=>signInWithFacebook()} className="btn w-[90%] bg-[#3b5998] border-none rounded-sm hover:bg-[#2f477a] hover:border-gray-300 text-base-100 justify-start capitalize mt-4 mb-5 min-h-[2.6rem] h-[2.6rem]">
                     <img src={facebook} alt="" width={22} className='mr-8'/>
                     <p>Sign in with Facebook</p>
                     </button>
@@ -86,7 +86,7 @@ const Login = () => {
                       <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="form-control w-[90%] mx-auto max-w-xs">
 
-                        <div className="inputField flex items-center border rounded-md">
+                        <div className="inputField flex items-center border rounded-sm">
                           <span className='w-10 border-r-2'><FontAwesomeIcon icon={faPaperPlane}/></span>
                           <input type="email" placeholder="your@email.com" className="input input-bordered w-full max-w-xs min-h-[2.6rem] h-[2.6rem] border-none focus:outline-none" 
                           {...register("email", {
@@ -106,7 +106,7 @@ const Login = () => {
                         {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-600 font-semibold">{errors.email.message}</span>}
                         </label>
 
-                        <div className="inputField flex items-center border rounded-md">
+                        <div className="inputField flex items-center border rounded-sm">
                           <span className='w-10 border-r-2'><FontAwesomeIcon icon={faLock}/></span>
                           <input type="password" placeholder="your password" className="input input-bordered w-full max-w-xs min-h-[2.6rem] h-[2.6rem] border-none focus:outline-none" 
                           {...register("password", {
@@ -130,13 +130,13 @@ const Login = () => {
                       <input />
                       {(error) && <span className='text-red-600 text-xs font-semibold w-full inline-block mb-2'>{error?.message}</span>}
 
-                      <button type="submit" className='btn w-full rounded-b-md rounded-t-none h-20 text-base-100'>LOG IN <span className='ml-2'><FontAwesomeIcon icon={faAngleRight}/></span></button>
+                      <button type="submit" className='btn w-full rounded-b-sm rounded-t-none h-20 text-base-100'>LOG IN <span className='ml-2'><FontAwesomeIcon icon={faAngleRight}/></span></button>
                       </form>
                       :
                       <form onSubmit={handleSubmit(onSubmit2)}>
                         <div className="form-control w-[90%] mx-auto max-w-xs">
 
-                          <div className="inputField flex items-center border rounded-md">
+                          <div className="inputField flex items-center border rounded-sm">
                             <span className='w-10 border-r-2'><FontAwesomeIcon icon={faPaperPlane}/></span>
                             <input type="email" placeholder="your@email.com" className="input input-bordered w-full max-w-xs min-h-[2.6rem] h-[2.6rem] border-none focus:outline-none" 
                             {...register("userEmail", {
@@ -156,7 +156,7 @@ const Login = () => {
                           {errors.userEmail?.type === 'pattern' && <span className="label-text-alt text-red-600 font-semibold">{errors.userEmail.message}</span>}
                           </label>
 
-                          <div className="inputField flex items-center border rounded-md">
+                          <div className="inputField flex items-center border rounded-sm">
                             <span className='w-10 border-r-2'><FontAwesomeIcon icon={faLockOpen}/></span>
                             <input type="password" placeholder="set your password" className="input input-bordered w-full max-w-xs min-h-[2.6rem] h-[2.6rem] border-none focus:outline-none" 
                             {...register("setPassword", {
@@ -177,7 +177,7 @@ const Login = () => {
                           </label>
 
 
-                          <div className="inputField flex items-center border rounded-md">
+                          <div className="inputField flex items-center border rounded-sm">
                             <span className='w-10 border-r-2'><FontAwesomeIcon icon={faLock}/></span>
                             <input type="password" placeholder="retype your password" className="input input-bordered w-full max-w-xs min-h-[2.6rem] h-[2.6rem] border-none focus:outline-none" 
                             {...register("confirmPassword", {
@@ -201,7 +201,7 @@ const Login = () => {
                         <input />
                         {(error2) && <span className='text-red-600 text-xs font-semibold w-full inline-block mb-2'>{error2?.message}</span>}
                         {(signUpPassErr) && <span className='text-red-600 text-xs font-semibold w-full inline-block mb-2'>{signUpPassErr}</span>}
-                        <button type="submit" className='btn w-full rounded-b-md rounded-t-none h-20 text-base-100'>SIGN UP <span className='ml-2'><FontAwesomeIcon icon={faAngleRight}/></span></button>
+                        <button type="submit" className='btn w-full rounded-b-sm rounded-t-none h-20 text-base-100'>SIGN UP <span className='ml-2'><FontAwesomeIcon icon={faAngleRight}/></span></button>
                       </form>
 
                     }

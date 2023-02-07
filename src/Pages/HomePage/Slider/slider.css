@@ -1,6 +1,7 @@
 .swiper {
     width: 100%;
     height: 100%;
+      z-index: 1;
   }
   
   .swiper-slide {
@@ -37,6 +38,7 @@
   width: var(--swiper-pagination-bullet-width,var(--swiper-pagination-bullet-size,10px));
   height: var(--swiper-pagination-bullet-height,var(--swiper-pagination-bullet-size,10px));
 }
+
 
 :root {
     --swiper-theme-color: rgb(229,25,55);

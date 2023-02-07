@@ -14,15 +14,16 @@ import galleryImg12 from '../../utilities/gallery/gallery_img12.jpg'
 import galleryImg13 from '../../utilities/gallery/gallery_img13.jpg'
 import PrimaryButton from '../Shared/PrimaryButton';
 import { Link } from 'react-router-dom';
+import productBG from '../../utilities/images/productBG.png'
 
 const ProductGallery = () => {
     return (
-        <div className='py-32'>
+        <div className='pb-32' style={{background:`url(${productBG})`,position:'center center',backgroundSize:'cover',backgroundRepeat:'no-repeat'}}>
             <div className=' grid grid-cols-5 gap-2 max-w-[1280px] mx-auto'>
                 <div className="featuredItem col-span-2 bg-stone-100 flex flex-col items-center justify-center">
                     <p className='text-2xl text-secondary font-semibold'>NEW CONCEPTS</p>
                     <p className='text-lg text-neutral'>Product Line</p>
-                    <PrimaryButton>Hello</PrimaryButton>
+                    <PrimaryButton>BROWSE THE COLLECTION</PrimaryButton>
                 </div>
                 <div className="featuredItem border">
                     <Link>
