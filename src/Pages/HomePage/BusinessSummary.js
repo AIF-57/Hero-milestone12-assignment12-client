@@ -4,9 +4,13 @@ import { faTruckFast, faHeadset, faArrowRotateLeft, faCertificate, faDollarSign,
 
 const BusinessSummary = () => {
     return (
-        <div className='max-w-[1280px] mx-auto py-20'>
-            <div className="heading px-5">
-                <p className='text-5xl text-accent text-left font-bold border-l-4 border-primary px-2 pb-5'>Business Features</p>
+        <div className='max-w-[1280px] mx-auto pb-32'>
+            <div className="sectionHeading text-left mb-5">
+                <div className="subHeading relative mb-5">
+                <p className='font-semibold tracking-widest text-primary'>Clients Aspect</p>
+                <div className='absolute w-14 h-[2px] bg-primary top-8'></div>
+                </div>
+                <p className='text-5xl font-bold text-secondary'>Business Features</p>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 px-5 lg:px-10'>
                 <div className="card card-side items-center mx-auto md:mx-0">

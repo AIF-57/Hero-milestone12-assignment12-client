@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 const ProductGallery = () => {
     return (
-        <div className='py-36 pb-20'>
+        <div className='py-32'>
             <div className=' grid grid-cols-5 gap-2 max-w-[1280px] mx-auto'>
                 <div className="featuredItem col-span-2 bg-stone-100 flex flex-col items-center justify-center">
                     <p className='text-2xl text-secondary font-semibold'>NEW CONCEPTS</p>
