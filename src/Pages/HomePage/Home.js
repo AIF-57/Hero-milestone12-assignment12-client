@@ -5,6 +5,7 @@ import AboutUs from './AboutUs/AboutUs';
 import BusinessFeature from './BusinessFeature';
 import BusinessSummary from './BusinessSummary/BusinessSummary';
 import ClientsReviews from './ClientsReviews/ClientsReviews';
+import FAQ from './FAQ/FAQ';
 import ProductGallery from './ProductGallery';
 import Slider from './Slider/Slider';
 
@@ -18,6 +19,7 @@ const Home = () => {
             <ProductGallery></ProductGallery>
             <BusinessFeature></BusinessFeature>
             <ClientsReviews></ClientsReviews>
+            <FAQ></FAQ>
             <Footer></Footer>
         </div>
     );
