@@ -1,0 +1,141 @@
+[
+    {
+        "Model":"RED AXS POWER METER",
+        "MODEL ID":"PM-RED-D1",
+        "Category":"Cranksets",
+        "Type":"Road",
+        "DESCRIPTION":"The SRAM RED AXS power meter breaks with tradition — and breaks through to new levels of performance. We reengineered road gearing: reducing front chainring size and adding more range to the rear cassette. We also maintained a 13-tooth delta on all chainring pairs, ensuring precise shifting for any setup. This results in more useful gearing and better shifting across all configurations. Designed with Quarq DZero power measurement integrated into the crankset. Welcome to the pinnacle of the power meter.",
+        "FEATURES":["X-Range gearing technology gives you more range and a smoother gear progression, so you’re always in the right gear",
+                    "Power meter is fully integrated into the chainring set for lighter weight",
+                    "Power readings are accurate within +/-1.5% and aren’t affected by climate conditions during a ride",
+                    "Measures right and left leg power balance",
+                    "Improved front shifting performance for crisp and accurate front shifts",
+                    "Unique chainring shape results in a lighter weight, stiffer, more durable crankset",
+                    "Integrated chainring design significantly reduces weight",
+                    "DUB bottom bracket adds durability, simplicity and broad compatibility"
+                    ],
+        "MSRP":"$1200 - $1291",
+        "SPECIFICATIONS":{
+            "CRANK ARM LENGTH":"165mm, 167.5mm, 170mm, 172.5mm, 175mm, 177.5mm",
+            "BB SPINDLE INTERFACE":"DUB",
+            "BB COMPATIBILITY":"All SRAM Road DUB BBs",
+            "SPEEDS":"12",
+            "CHAINRING MATERIAL":"Aluminum",
+            "BOLT CIRCLE DIAMETER (BCD)":"Direct Mount (DM)",
+            "CHAINLINE":"45.0mm",
+            "CHAINRING SIZE":"46/33T, 48/35T, 50/37T"
+        },
+        "Image":"https://i.ibb.co/37kHg73/5037tdubsidel-2.jpg"
+    },
+    {
+        "Model":"FORCE AXS POWER METER",
+        "MODEL ID":"PM-FRC-D1",
+        "Category":"Cranksets",
+        "Type":"Road",
+        "DESCRIPTION":"In order to design a better product, sometimes you have to let tradition go. The SRAM Force AXS power meter is a prime example. By moving the range from the front of the drivetrain to the back and creating a consistent 13-tooth gap across all variants of chainring duos, we were able to improve shifting performance and give riders the gearing they truly want and need. Designed specifically for electronic shifting and featuring Quarq’s premier DZero power measurement technology, the SRAM Force AXS power meter is a huge step forward in power meter design.",
+        "FEATURES":["X-Range gearing technology gives you more range and a smoother gear progression, so you’re always in the right gear",
+                    "Spider-based power meter readings are accurate within +/-1.5% and aren’t affected by climate conditions during a ride",
+                    "Improved front shifting performance for crisp and accurate front shiftsImproved front shifting performance for crisp and accurate front shifts",
+                    "Unique chainring shape results in a lighter weight, stiffer, more durable crankset",
+                    "Integrated chainring design significantly reduces weight",
+                    "DUB bottom bracket adds durability and simplicity"
+                    ],
+        "MSRP":"",
+        "SPECIFICATIONS":{
+            "CRANK ARM LENGTH":"165mm, 167.5mm, 170mm, 172.5mm, 175mm, 177.5mm",
+            "BB SPINDLE INTERFACE":"DUB",
+            "BB COMPATIBILITY":"All SRAM Road DUB BBs",
+            "SPEEDS":"12",
+            "CHAINRING MATERIAL":"Aluminum",
+            "BOLT CIRCLE DIAMETER (BCD)":"107 BCD",
+            "CHAINLINE":"45.0mm",
+            "CHAINRING SIZE":"46/33T, 48/35T"
+        },
+        "Image":"https://i.ibb.co/nkrMS4m/4835sidel.jpg"
+    },
+    {
+        "Model":"FORCE 1 WIDE CRANKSET",
+        "MODEL ID":"FC-FRC-1W-D1",
+        "Category":"Cranksets",
+        "Type":"Road",
+        "DESCRIPTION":"We originated the 1x drivetrain, and the SRAM Force 1 Wide crankset evolves the innovation. It's lighter, stronger and simpler with a direct mount chainring for less weight. Wide variant cranks accommodate the largest of tires for your 1x gravel machine.",
+        "FEATURES":["Direct mount chainrings in 38t through 46t",
+                    "DUB™ bottom bracket adds durability and simplicity",
+                    "Wide chainline crankset to fit the biggest gravel tires",
+                    "Longer DUB crank spindle accommodates both Road and MTB width frame bottom bracket standards for unmatched cross-compatibility across brands",
+                    "Compatible with 135, 142 and Boost rear spacing",
+                    "Can be upgraded to a power meter"
+                    ],
+        "MSRP":"$263",
+        "SPECIFICATIONS":{
+            "CRANK ARM LENGTH":"165mm, 167.5mm, 170mm, 172.5mm, 175mm",
+            "BB SPINDLE INTERFACE":"DUB",
+            "BB COMPATIBILITY":"All SRAM Road DUB BBs",
+            "SPEEDS":"12",
+            "CHAINRING MATERIAL":"Aluminum",
+            "BOLT CIRCLE DIAMETER (BCD)":"Direct Mount (DM)",
+            "CHAINLINE":"47.5mm",
+            "CHAINRING SIZE":"40T"
+        },
+        "Image":["https://i.ibb.co/D9CZ4zy/fc-force-1-d1-dub-gls-1725-dm-44-c-3q-h.png",
+                "https://i.ibb.co/dpZxhrQ/fc-force-1-d1-dub-gls-1725-dm-44-c-side-h.png"
+                ]
+    },
+    {
+        "Model":"RED AXS POWER METER KIT",
+        "MODEL ID":"PM-AXS-KITR-D1",
+        "Category":"Cranksets",
+        "Type":"Road",
+        "DESCRIPTION":"",
+        "FEATURES":["AXS enabled for easy monitoring and firmware upgrades",
+                    "X-Range gearing technology gives you more range and a smoother gear progression, so you're always in the right gear",
+                    "Integrated power measurement",
+                    "Power meter is fully integrated into the chainring set for lighter weight",
+                    "Power readings are accurate within +/-1.5% and aren't affected by climate conditions during a ride",
+                    "Improved front shifting performance for crisp and accurate front shifts",
+                    "Unique chainring shape results in a lighter weight, stiffer, more durable crankset",
+                    "Integrated chainring design significantly reduces weight",
+                    "8-bolt direct mount compatibility only to new RED and Force eTap AXS cranks. Not reverse compatible with prior 8-bolt cranks",
+                    "52/39, 54/41 and 56/43 combinations require dual mount SRAM RED eTap AXS front derailleur, included."
+                    ],
+        "MSRP":"$881 - $1452",
+        "SPECIFICATIONS":{
+            "CRANK ARM LENGTH":"n/a",
+            "BB SPINDLE INTERFACE":"n/a",
+            "BB COMPATIBILITY":"n/a",
+            "SPEEDS":"12",
+            "CHAINRING MATERIAL":"Aluminum",
+            "BOLT CIRCLE DIAMETER (BCD)":"Direct Mount (DM)",
+            "CHAINLINE":"n/a",
+            "CHAINRING SIZE":"46/33T, 48/35T, 50/37T, 52/39T, 54/41T, 56/43T",
+            "HUB SPACING COMPATIBILITY" : "Standard 142mm"
+        },
+        "Image":"https://i.ibb.co/cQKHm2D/003018228001dm4835polargreydrivesidel.jpg"
+    },
+    {
+        "Model":"BB7 ROAD SL",
+        "MODEL ID":"DB-BLBG-7RSL-A1",
+        "Category":"Brakes",
+        "Type":"Road",
+        "DESCRIPTION":"This race-ready mechanical disc brake takes the proven power and performance of BB7 and dials it up a few notches with its sleek 'Falcon Grey' anodizing and weight-saving hardware. So you'll be just as confident on the climbs as you are on the descents. Compatible with RED, Force, Rival, and Apex levers.",
+        "FEATURES":["Lightweight",
+                    "Titanium hardware"
+                    ],
+        "MSRP":"$129 - $183",
+        "SPECIFICATIONS":{
+            "APPLICATION (DB)":"Road",
+            "BRAKE TYPE":"Mechanical",
+            "COLOR (DB)":"Grey Anodized,Silver",
+            "BLADE MATERIAL":"n/a",
+            "ORIENTATION":"n/a",
+            "PAD TYPE (DISC)":"Al backed organic, Aluminum-backed organic",
+            "BRACKET (DISC BRAKE)":"Direct mount DIR, Intl Std(140mm Rear,160mm Frt rotor) 0IS, Intl Std(160mm Rear,180mm Frt rotor) 20I, n/a, Post mount (20mm spacer) 20P, Post mount (20mm spacer) 20S, Post mount (40mm spacer) 40P",
+            "REACH ADJUST":"n/a",
+            "CONTACT ADJUST":"n/a",
+            "HYDRAULIC FLUID":"n/a",
+            "LEVER PIVOT":"n/a",
+            "WEIGHT BASED ON" : "Caliper only"
+        },
+        "Image":"https://i.ibb.co/r2LJQn2/41461348701273bb7rsl.jpg"
+    }
+]

@@ -23,7 +23,7 @@ const ProductGallery = () => {
                 <div className="featuredItem col-span-2 bg-stone-100 flex flex-col items-center justify-center">
                     <p className='text-2xl text-secondary font-semibold'>NEW CONCEPTS</p>
                     <p className='text-lg text-neutral'>Product Line</p>
-                    <PrimaryButton>BROWSE THE COLLECTION</PrimaryButton>
+                    <Link to='/all_products'><PrimaryButton>BROWSE THE COLLECTION</PrimaryButton></Link>
                 </div>
                 <div className="featuredItem border">
                     <Link>
