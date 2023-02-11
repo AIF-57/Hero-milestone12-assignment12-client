@@ -25,9 +25,9 @@ const AllProduct = () => {
         <div className="topImg h-[50vh] flex flex-col justify-center"
             style={{background:`url(${top_BG})`, position:'center bottom', backgroundSize:'cover', backgroundRepeat:'no-repeat'}}
         >
-          <p className='text-base-100 text-5xl font-bold'>PRODUCT COLLECTION</p>
+          <p className='text-base-100 text-5xl font-bold'>PRODUCT LINE</p>
         </div>
-        <div className="drawer drawer-mobile">
+        <div className="drawer drawer-mobile h-auto">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col items-center py-10">
               <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
