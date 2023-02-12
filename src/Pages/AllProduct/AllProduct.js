@@ -3,6 +3,8 @@ import { useQuery } from 'react-query';
 import ProductCard from './ProductCard';
 import Navbar from '../Shared/Navbar';
 import top_BG from '../../utilities/images/products_BG.jpg';
+import Footer from '../Shared/Footer';
+
 
 
 const AllProduct = () => {
@@ -47,6 +49,8 @@ const AllProduct = () => {
           
           </div>
         </div>
+
+        <Footer></Footer>
       </div>
     );
 };
