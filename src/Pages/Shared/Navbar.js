@@ -1,10 +1,19 @@
+import { faGripHorizontal, faRightFromBracket, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Navbar = () => {
+    const [user] = useAuthState(auth);
+    const [signOut] = useSignOut(auth);
+    console.log(user)
+    const userImg = user?.photoURL;
+
     return (
         <div>
-        <div className="navbar mx-auto bg-base-100">
+        <div className="navbar mx-auto bg-base-100 border-b">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -44,7 +53,30 @@ const Navbar = () => {
           </div>
           <Link to='/' className="btn btn-ghost normal-case text-2xl italic font-extrabold text-primary">Mountain</Link>
         <div className="navbar-end px-2">
+        {
+          user?
+          <div className="dropdown dropdown-bottom dropdown-end">
+            <label tabIndex={0} className="btn m-1 bg-base-100 border-none hover:bg-base-100">
+              <div className="avatar">
+                <div className="w-10 rounded-full">
+                  {
+                    userImg?
+                    <img src={userImg} />
+                    :
+                    <span className='text-secondary text-4xl'><FontAwesomeIcon icon={faUserAlt}/></span>
+                  }
+                </div>
+            </div>
+            </label>
+            <ul tabIndex={0} className="dropdown-content menu p-2 bg-base-100 rounded-sm w-80 font-semibold shadow-2xl">
+              <li><Link to={'/dashboard'}><span className='bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center'><FontAwesomeIcon icon={faGripHorizontal} className='text-secondary'></FontAwesomeIcon></span>Dashboard</Link></li>
+              <li><button onClick={()=>{signOut()}} className='flex'><span className='bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center'><FontAwesomeIcon icon={faRightFromBracket} className='text-secondary'></FontAwesomeIcon></span><p>Logout</p></button></li>
+            </ul>
+          </div>
+
+          :
           <Link to='/login' className="btn btn-sm rounded-sm border-none text-base-100">Login</Link>
+        }
         
         </div>
       </div>
@@ -52,4 +84,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default Navbar; 

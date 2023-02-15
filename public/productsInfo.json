@@ -1,5 +1,33 @@
 [
     {
+        "Model":"RED ETAP AXS REAR DERAILLEUR",
+        "MODEL ID":"RD-RED-E-D1",
+        "Category":"Rear Derailleurs",
+        "Type":"Road",
+        "DESCRIPTION":"The heart of the connected cadre. The SRAM RED eTap AXS™ rear derailleur is AXS enabled for easy personalization and designed for both 1x and 2x systems. Advanced chain management keeps it silent and secure no matter the terrain. The derailleur also comes with faster pulleys, bearings, motors and signals, improving speed in every way.",
+        "FEATURES":["SRAM AXS™ enabled for easy personalization",
+                    "Orbit™ chain management technology keeps drivetrain quiet and secure",
+                    "Compatible with both 1x and 2x drivetrains",
+                    "36t-max derailleur is compatible with 10-36, 10-33, and 10-28 cassettes",
+                    "33t-max derailleur is compatible with 10-26, 10-28, and 10-33 cassettes",
+                    "Improved motor and signal travel for faster shifting",
+                    "Large X-SYNC™ pulleys and ceramic bearings for increased durability and efficiency",
+                    "Compatible with existing eTap® batteries"
+                    ],
+        "MSRP":"$764",
+        "SPECIFICATIONS":{
+            "CAGE (RD)":"n/a",
+            "CABLE PULL RATIO":"n/a",
+            "SPEED (RD)":"12S",
+            "COLOR (RD)":"Black",
+            "CHAINRING MATERIAL":"Aluminum",
+            "CAGE MATERIAL (RD)":"Carbon",
+            "PULLEY BEARINGS MATERIAL":"Ceramic",
+            "MAX TOOTH":"33, 36"
+        },
+        "Image":"https://i.ibb.co/Rp7jHHj/rd-red-xplr-etap-axs-d1-max-44t-c-3q-s.png"
+    },
+    {
         "Model":"RED AXS POWER METER",
         "MODEL ID":"PM-RED-D1",
         "Category":"Cranksets",

@@ -40,3 +40,6 @@ https://i.ibb.co/C7MSSgZ/xg1190cassetteback.jpg
 https://i.ibb.co/XZCJrs5/xg1190front-1.jpg
 https://i.ibb.co/MSNNy90/xg1190front.jpg
 https://i.ibb.co/nkrMS4m/4835sidel.jpg
+https://i.ibb.co/Rp7jHHj/rd-red-xplr-etap-axs-d1-max-44t-c-3q-s.png
+https://i.ibb.co/TrNdHcV/rd-red-xplr-etap-axs-d1-max-44t-c-side-s.png
+https://i.ibb.co/fMSnwgg/rd-red-xplr-etap-axs-d1-max-44t-d-back-s.png

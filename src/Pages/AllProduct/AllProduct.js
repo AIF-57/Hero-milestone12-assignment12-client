@@ -21,6 +21,9 @@ const AllProduct = () => {
         if(data){
           console.log(data)
         }
+        let categories = [];
+        data.map(product=>categories.indexOf(product.Category) === -1 && categories.push(product.Category))
+        console.log(categories)
     return (
       <div>
         <Navbar></Navbar>
@@ -31,10 +34,10 @@ const AllProduct = () => {
         </div>
         <div className="drawer drawer-mobile h-auto">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col items-center py-10">
+          <div className="drawer-content flex flex-col items-center p-10">
               <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
               <p className='mr-auto text-2xl font-bold text-secondary'>{data.length} PRODUCTS</p>
-              <div className='grid grid-cols-4 gap-y-10'>
+              <div className='grid grid-cols-4 gap-10'>
                   {
                     data?.map(product => <ProductCard key={product._id} details={product}></ProductCard>)
                   }
@@ -42,10 +45,22 @@ const AllProduct = () => {
           </div> 
           <div className="drawer-side">
             <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-            <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-              <li><a>Sidebar Item 1</a></li>
-              <li><a>Sidebar Item 2</a></li>
-            </ul>
+            <div className="p-10 w-64 bg-base-100 text-base-content">
+              <p className='text-left font-bold text-secondary text-xl border-b border-secondary pb-5'>FILTERS</p>
+              <div className="form-control">
+                  <div className='flex justify-between items-center py-5 font-semibold text-secondary text-base'>
+                    <p>CATEGORY</p>
+                    <div className='w-6 h-[2px] bg-primary'></div>
+                  </div>
+                  {
+                    categories.map(category=><label className="label justify-start cursor-pointer">
+                                                <input type="checkbox"  className="checkbox h-3 w-3 rounded-none mr-3 border-secondary" />
+                                                <span className="label-text text-base text-secondary">{category}</span> 
+                                              </label>
+                                  )
+                  }
+              </div>
+            </div>
           
           </div>
         </div>
