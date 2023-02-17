@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faLock, faLockOpen, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Shared/Loading';
 
 
 
@@ -48,8 +49,8 @@ const Login = () => {
 
         const navigate = useNavigate();
 
-        if(gLoading || loading){
-          return loading;
+        if(loading || gLoading || fLoading){
+          return <Loading></Loading>
         }
         if(gUser || user){
           navigate('/');

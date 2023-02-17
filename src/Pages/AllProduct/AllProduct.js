@@ -4,6 +4,7 @@ import ProductCard from './ProductCard';
 import Navbar from '../Shared/Navbar';
 import top_BG from '../../utilities/images/products_BG.jpg';
 import Footer from '../Shared/Footer';
+import Loading from '../Shared/Loading';
 
 
 
@@ -14,7 +15,7 @@ const AllProduct = () => {
           )
         )
       
-        if (isLoading) return 'Loading...'
+        if (isLoading) return <Loading></Loading>
       
         if (error) return 'An error has occurred: ' + error.message
 

@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const Navbar = () => {
-    const [user] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const [signOut] = useSignOut(auth);
-    console.log(user)
+    // console.log(user)
     const userImg = user?.photoURL;
 
     return (
@@ -58,6 +58,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-bottom dropdown-end">
             <label tabIndex={0} className="btn m-1 bg-base-100 border-none hover:bg-base-100">
               <div className="avatar">
+                {(loading) && <button className="btn btn-square loading bg-base-100 text-primary w-full border-none"></button>}
                 <div className="w-10 rounded-full">
                   {
                     userImg?
