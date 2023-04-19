@@ -1,4 +1,4 @@
-import { faGripHorizontal, faRightFromBracket, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faGripHorizontal, faRightFromBracket, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
@@ -10,6 +10,7 @@ const Navbar = () => {
     const [signOut] = useSignOut(auth);
     // console.log(user)
     const userImg = user?.photoURL;
+    
 
     return (
         <div>
@@ -53,6 +54,10 @@ const Navbar = () => {
           </div>
           <Link to='/' className="btn btn-ghost normal-case text-2xl italic font-extrabold text-primary">Mountain</Link>
         <div className="navbar-end px-2">
+        <ul className="menu menu-horizontal px-1">
+        <li><FontAwesomeIcon icon={faCartShopping}/></li>
+        </ul>
+
         {
           user?
           <div className="dropdown dropdown-bottom dropdown-end">
@@ -62,7 +67,7 @@ const Navbar = () => {
                 <div className="w-10 rounded-full">
                   {
                     userImg?
-                    <img src={userImg} />
+                    <img src={userImg} alt='user'/>
                     :
                     <span className='text-secondary text-4xl'><FontAwesomeIcon icon={faUserAlt}/></span>
                   }

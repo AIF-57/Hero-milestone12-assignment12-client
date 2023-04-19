@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import Navbar from '../Shared/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faSquare } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../Shared/Footer';
 import Loading from '../Shared/Loading';
 
@@ -44,7 +44,7 @@ const Product = () => {
                 <p className="normal-case text-2xl font-bold text-base-100 px-5">{data.Model}</p>
                 <ul className="menu menu-horizontal ml-auto px-0 text-lg text-stone-400">
                     <li className='w-36 h-16 flex items-center'><a href='#specifications' className='inline-block'>Specifications</a></li>
-                    <li  className='bg-primary h-16 w-36 text-base-100 flex items-center'><Link className='inline-block w-full text-center'>Item 3</Link></li>
+                    <li  className='bg-primary h-16 w-36 text-base-100 flex items-center'><Link className='inline-block w-full text-center'><FontAwesomeIcon icon={faCartPlus}/></Link></li>
                 </ul>
             </div>
 

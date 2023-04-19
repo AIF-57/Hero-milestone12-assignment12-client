@@ -49,10 +49,10 @@ const Login = () => {
 
         const navigate = useNavigate();
 
-        if(loading || gLoading || fLoading){
+        if(loading || gLoading || fLoading || loading2){
           return <Loading></Loading>
         }
-        if(gUser || user){
+        if(gUser || user || newUser){
           navigate('/');
         }
 
