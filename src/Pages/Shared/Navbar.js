@@ -54,9 +54,6 @@ const Navbar = () => {
           </div>
           <Link to='/' className="btn btn-ghost normal-case text-2xl italic font-extrabold text-primary">Mountain</Link>
         <div className="navbar-end px-2">
-        <ul className="menu menu-horizontal px-1">
-        <li><FontAwesomeIcon icon={faCartShopping}/></li>
-        </ul>
 
         {
           user?
@@ -75,8 +72,10 @@ const Navbar = () => {
             </div>
             </label>
             <ul tabIndex={0} className="dropdown-content menu p-2 bg-base-100 rounded-sm w-80 font-semibold shadow-2xl">
+              <li><Link to={'/my-cart'}><span className='bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center'><FontAwesomeIcon icon={faCartShopping} className='text-secondary'></FontAwesomeIcon></span>Cart</Link></li>
               <li><Link to={'/dashboard'}><span className='bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center'><FontAwesomeIcon icon={faGripHorizontal} className='text-secondary'></FontAwesomeIcon></span>Dashboard</Link></li>
               <li><button onClick={()=>{signOut()}} className='flex'><span className='bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center'><FontAwesomeIcon icon={faRightFromBracket} className='text-secondary'></FontAwesomeIcon></span><p>Logout</p></button></li>
+      
             </ul>
           </div>
 

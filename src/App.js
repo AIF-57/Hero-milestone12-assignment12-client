@@ -7,7 +7,11 @@ import Product from './Pages/Product/Product';
 import DashBoard from './Pages/DashBoard/DashBoard';
 import ManageProducts from './Pages/DashBoard/ManageProducts';
 import NewProduct from './Pages/DashBoard/NewProduct';
-import EditProduct from './Pages/DashBoard/EditProduct';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import MyCart from './Pages/MyCart/MyCart';
+
+
 
 function App() {
   return (
@@ -22,7 +26,9 @@ function App() {
           <Route path='new_product' element={<NewProduct></NewProduct>}/>
         </Route>
         <Route path='/login' element={<Login></Login>}/>
+        <Route path='/my-cart' element={<MyCart></MyCart>}/>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

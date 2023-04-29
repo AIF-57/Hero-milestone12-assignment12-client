@@ -1,16 +1,24 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Navbar from '../Shared/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faSquare } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../Shared/Footer';
 import Loading from '../Shared/Loading';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import axios from 'axios';     
+import { toast } from 'react-toastify';
+
 
 
 
 const Product = () => {
     const {id} = useParams();
+    const [user] = useAuthState(auth);
+
+    const customerName = user?.displayName || user?.email;
 
     const url = `http://localhost:5000/product/${id}`
     const { isLoading, error, data } = useQuery('product', () =>
@@ -24,13 +32,33 @@ const Product = () => {
     if (error) return 'An error has occurred: ' + error.message
 
     if(data){
-      console.log(data)
     }
 
     const features = data.FEATURES;
     const specifications = data.SPECIFICATIONS;
     console.log(specifications);
     console.log(Object.entries(specifications));
+
+    const addToCart = () =>{
+        const orderDetails = {
+            item : data,
+            customerInfo : customerName,
+            unit: 1
+        }
+        axios.post('http://localhost:5000/order', {
+            orderDetails
+          })
+          .then(function (response) {
+            if(response.data.success){
+                toast("Product added cart successfully !")
+            }else{
+                toast.error("The product is already added")
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
     return (
         <div>
             <Navbar></Navbar>
@@ -43,8 +71,8 @@ const Product = () => {
             <div className="navbar text-neutral-content p-0 bg-secondary">
                 <p className="normal-case text-2xl font-bold text-base-100 px-5">{data.Model}</p>
                 <ul className="menu menu-horizontal ml-auto px-0 text-lg text-stone-400">
-                    <li className='w-36 h-16 flex items-center'><a href='#specifications' className='inline-block'>Specifications</a></li>
-                    <li  className='bg-primary h-16 w-36 text-base-100 flex items-center'><Link className='inline-block w-full text-center'><FontAwesomeIcon icon={faCartPlus}/></Link></li>
+                    <li className='w-36 h-16 flex items-center'><a href='#specifications' className='inline-block h-full'>Specifications</a></li>
+                    <li  className='bg-primary h-16 w-36 text-base-100 flex items-center'><button onClick={addToCart} className='inline-block w-full h-full text-center'><FontAwesomeIcon icon={faCartPlus}/></button></li>
                 </ul>
             </div>
 
@@ -59,10 +87,8 @@ const Product = () => {
                                 <p className='text-2xl'>{data.MSRP}</p>
                             </div>
                             <div className="status">
-                            <p className='font-bold text-accent text-sm'>STATUS</p>
-                            </div>
-                            <div className="status">
-                            <p className='font-bold text-accent text-sm'>STATUS</p>
+                                <p className='font-bold text-accent text-sm'>AVAILABILITY</p>
+                                <p className='text-2xl'>120</p>
                             </div>
                         </section>
                     </div>

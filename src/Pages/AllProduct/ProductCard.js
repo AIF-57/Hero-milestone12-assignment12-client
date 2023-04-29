@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({details}) => {
-    console.log(details)
     return (
         <div>
             <Link to={`/product/${details.MODEL_ID}`}>
