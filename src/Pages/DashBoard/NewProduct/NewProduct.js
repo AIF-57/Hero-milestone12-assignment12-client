@@ -2,21 +2,48 @@ import axios from 'axios';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import auth from '../../firebase.init';
+import auth from '../../../firebase.init';
+import { useQuery } from 'react-query';
+import PrimaryButton from '../../Shared/PrimaryButton'
+import { toast } from 'react-toastify';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const NewProduct = () => {
     const [user] = useAuthState(auth)
     const userEmail = user?.email;
+
+
+    const url = `http://localhost:5000/product/categories`
+    const { data } = useQuery('product', () =>
+        fetch(url).then(res =>
+        res.json()
+        )
+    );
+
+
+    const navigate = useNavigate();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
-        const productDetails = JSON.parse(data.SPECIFICATIONS)
-        axios.post('http://localhost:5000/product',{
-            data
-        })
-        .then(
-        ) 
-        console.log(productDetails)
-    };
+        const productSpecObj = JSON.parse(data.SPECIFICATIONS);
+        data.SPECIFICATIONS = productSpecObj;
+
+        const productFeaturesStr = data.FEATURES;
+        const productFeaturesArr = productFeaturesStr.split(",");
+        data.FEATURES = productFeaturesArr;
+
+        
+        axios.post('http://localhost:5000/new_product',
+            data)
+            .then(function (response) {
+                if(response.data.insertedId){
+                    toast.success("New Product added successfully.");
+                    navigate('/dashboard');
+                };
+              })
+              .catch(function (error) {
+                toast.error(error);
+              });
+    }
     return (
         <div className='bg-base-100 my-5 text-left p-5 rounded-sm'>
             <p className='text-neutral font-semibold'>Add Product</p>
@@ -70,12 +97,9 @@ const NewProduct = () => {
                                     message:'select a category'
                                 }
                             })}>
-                                <option defaultValue={this}>Select Category</option>
-                                <option>Star Wars</option>
-                                <option>Harry Potter</option>
-                                <option>Lord of the Rings</option>
-                                <option>Planet of the Apes</option>
+                                {data?.map(c => <option>{c.Category}</option>)};
                                 <option>Custom Category</option>
+
                             </select>
                             <label className="label">
                                 {errors.Category?.type === 'required' && <span className="label-text-alt text-primary">{errors.Category.message}</span>}
@@ -83,7 +107,7 @@ const NewProduct = () => {
 
                         </div>
                         <div className="customCategory w-1/2">
-                            <input type="text" placeholder="Custom Category" {...register("customCategory",{
+                            <input type="text" placeholder="Custom Category" disabled {...register("customCategory",{
                                 required:{
                                     value:false,
                                     message:'must be filled'
@@ -96,9 +120,9 @@ const NewProduct = () => {
 
 
                     <label className="label">
-                        <span className="label-text">Description</span>
+                        <span className="label-text font-semibold">Description</span>
                     </label>
-                    <textarea className="textarea textarea-bordered h-24 w-full" placeholder="Description" {
+                    <textarea className="textarea textarea-bordered h-40 w-full" placeholder="Description" {
                         ...register('DESCRIPTION',{
                             required:{
                                 value:true,
@@ -112,9 +136,9 @@ const NewProduct = () => {
 
 
                     <label className="label">
-                        <span className="label-text">Features</span>
+                        <span className="label-text font-semibold">Features <span className='font-normal'>use commas for several sentences</span></span>
                     </label>
-                    <textarea className="textarea textarea-bordered h-24 w-full" placeholder="Features" {
+                    <textarea className="textarea textarea-bordered h-40 w-full" placeholder="Features" {
                         ...register('FEATURES',{
                             required:{
                                 value:true,
@@ -128,9 +152,9 @@ const NewProduct = () => {
 
 
                     <label className="label">
-                        <span className="label-text">Specifications</span>
+                        <span className="label-text font-semibold">Specifications <span className='font-normal'>{`[Ex- {"Color":"Red","Type":"Mechanical",}]`}</span></span>
                     </label>
-                    <textarea className="textarea textarea-bordered h-24 w-full" placeholder="Specifications" {
+                    <textarea className="textarea textarea-bordered h-40 w-full" placeholder="Specifications" {
                         ...register('SPECIFICATIONS',{
                             required:{
                                 value:true,
@@ -142,11 +166,11 @@ const NewProduct = () => {
                         {errors.SPECIFICATIONS?.type === 'required' && <span className="label-text-alt text-primary">{errors.SPECIFICATIONS.message}</span>}
                     </label>
                     
-
+                    <section>
                     <label className="label">
                         <span className="label-text-alt font-semibold">Product MSRP</span>
                     </label>
-                    <input type="text" placeholder="Product MSRP" {...register("MSRP",{
+                    <input type="text" defaultValue="$" placeholder="Product MSRP" {...register("MSRP",{
                         required:{
                             value:true,
                             message:'must be filled'
@@ -156,7 +180,9 @@ const NewProduct = () => {
                         {errors.MSRP?.type === 'required' && <span className="label-text-alt text-primary">{errors.MSRP.message}</span>}
                     </label>
                     
-                    <input type="submit" />
+                    <PrimaryButton type='submit' className='text-2xl'>NEW PRODUCT</PrimaryButton>
+ 
+                    </section>
                 </form>
 
             </section>

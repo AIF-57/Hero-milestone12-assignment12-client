@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../Shared/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faSquare } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,8 @@ const Product = () => {
     const [user] = useAuthState(auth);
 
     const customerName = user?.displayName || user?.email;
+
+    const navigate = useNavigate()
 
     const url = `http://localhost:5000/product/${id}`
     const { isLoading, error, data } = useQuery('product', () =>
@@ -40,24 +42,29 @@ const Product = () => {
     console.log(Object.entries(specifications));
 
     const addToCart = () =>{
-        const orderDetails = {
-            item : data,
-            customerInfo : customerName,
-            unit: 1
-        }
-        axios.post('http://localhost:5000/order', {
-            orderDetails
-          })
-          .then(function (response) {
-            if(response.data.success){
-                toast("Product added cart successfully !")
-            }else{
-                toast.error("The product is already added")
+        if(customerName){
+            const orderDetails = {
+                item : data,
+                customerInfo : customerName,
+                unit: 1,
+                paymentStatus: 'unpaid'
             }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+            axios.post('http://localhost:5000/order', {
+                orderDetails
+              })
+              .then(function (response) {
+                if(response.data.success){
+                    toast("Product added cart successfully !")
+                }else{
+                    toast.error("The product is already added")
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+        }else{
+            navigate('/login')
+        }
     }
     return (
         <div>

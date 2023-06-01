@@ -1,8 +1,9 @@
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ProductHorizontal = ({details}) => {
+const ProductHorizontal = ({details,setDeleteProduct}) => {
     return (
         <div className='grid grid-cols-8 gap-5 border rounded-sm my-5 text-center p-2 h-40'>
             <div className='flex items-center justify-center'>
@@ -30,8 +31,13 @@ const ProductHorizontal = ({details}) => {
                 <p className='font-semibold text-neutral'></p>
             </div>
             <div className='flex flex-col justify-evenly items-center'>
-                <span className='border h-12 w-12 rounded-full flex items-center justify-center cursor-pointer tooltip' data-tip="edit product"><FontAwesomeIcon className='text-2xl text-accent' icon={faEdit}/></span>
-                <span className='border h-12 w-12 rounded-full flex items-center justify-center cursor-pointer tooltip' data-tip="delete product"><FontAwesomeIcon className='text-2xl text-accent' icon={faTrash}/></span>
+                <Link to={`/dashboard/edit_product/${details.MODEL_ID}`}>                
+                    <span className='border h-12 w-12 rounded-full flex items-center justify-center cursor-pointer tooltip' data-tip="edit product"><FontAwesomeIcon className='text-2xl text-accent' icon={faEdit}/></span>
+                </Link>
+                <label htmlFor="deleteProduct-modal" onClick={()=>setDeleteProduct(details._id)}>
+                    <span className='border h-12 w-12 rounded-full flex items-center justify-center cursor-pointer tooltip' data-tip="delete product"><FontAwesomeIcon className='text-2xl text-accent' icon={faTrash}/></span>
+                </label>
+
             </div>
 
         </div>
