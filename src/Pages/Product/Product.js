@@ -1,26 +1,17 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from '../Shared/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faSquare } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../Shared/Footer';
 import Loading from '../Shared/Loading';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../firebase.init';
-import axios from 'axios';     
-import { toast } from 'react-toastify';
 
 
 
 
 const Product = () => {
     const {id} = useParams();
-    const [user] = useAuthState(auth);
-
-    const customerName = user?.displayName || user?.email;
-
-    const navigate = useNavigate()
 
     const url = `http://localhost:5000/product/${id}`
     const { isLoading, error, data } = useQuery('product', () =>
@@ -34,38 +25,15 @@ const Product = () => {
     if (error) return 'An error has occurred: ' + error.message
 
     if(data){
+        console.log(data);
     }
+
+
 
     const features = data.FEATURES;
     const specifications = data.SPECIFICATIONS;
-    console.log(specifications);
-    console.log(Object.entries(specifications));
 
-    const addToCart = () =>{
-        if(customerName){
-            const orderDetails = {
-                item : data,
-                customerInfo : customerName,
-                unit: 1,
-                paymentStatus: 'unpaid'
-            }
-            axios.post('http://localhost:5000/order', {
-                orderDetails
-              })
-              .then(function (response) {
-                if(response.data.success){
-                    toast("Product added cart successfully !")
-                }else{
-                    toast.error("The product is already added")
-                }
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-        }else{
-            navigate('/login')
-        }
-    }
+
     return (
         <div>
             <Navbar></Navbar>
@@ -79,7 +47,7 @@ const Product = () => {
                 <p className="normal-case text-2xl font-bold text-base-100 px-5">{data.Model}</p>
                 <ul className="menu menu-horizontal ml-auto px-0 text-lg text-stone-400">
                     <li className='w-36 h-16 flex items-center'><a href='#specifications' className='inline-block h-full'>Specifications</a></li>
-                    <li  className='bg-primary h-16 w-36 text-base-100 flex items-center'><button onClick={addToCart} className='inline-block w-full h-full text-center'><FontAwesomeIcon icon={faCartPlus}/></button></li>
+                    <li  className='bg-primary h-16 w-36 text-base-100 flex items-center'><Link to={`/purchase/${id}`} className='inline-block w-full h-full text-center'><FontAwesomeIcon icon={faCartPlus}/></Link></li>
                 </ul>
             </div>
 
@@ -95,14 +63,15 @@ const Product = () => {
                             </div>
                             <div className="status">
                                 <p className='font-bold text-accent text-sm'>AVAILABILITY</p>
-                                <p className='text-2xl'>120</p>
+                                <p className='text-2xl'>{data.AVAILABILITY}</p>
                             </div>
                         </section>
                     </div>
                     <div className="features w-[30%] text-left">
                         <p className='text-accent font-bold tracking-widest mb-5'>FEATURES</p>
                         {
-                            features.map(feature=><div className='my-2 flex text-secondary'>
+                            features?.map(feature=><div className='my-2 flex text-secondary'
+                                                    key={feature}>
                                                     <span className='mr-2 mt-[-2px]'><FontAwesomeIcon icon={faSquare} className='text-[5px] text-primary'></FontAwesomeIcon></span>
                                                     <p className='leading-7'>{feature}</p>
                                                 </div>)
@@ -113,7 +82,8 @@ const Product = () => {
                 <div id='specifications' className="specifications py-10 border-y border-secondary">
                     <p className='text-left text-4xl font-bold mb-10 to-secondary'>SPECIFICATIONS</p>
                     {
-                        Object.entries(specifications).map(entry=><div className='flex text-left border-b py-5'>
+                        Object?.entries(specifications).map(entry=><div className='flex text-left border-b py-5'
+                                                                    key={entry}>
                                                                     <p className='w-[40%] text-accent font-semibold tracking-widest'>{entry[0]}</p>
                                                                     <p className='w-[60%] text-accent'>{entry[1]}</p>
                                                                 </div>)

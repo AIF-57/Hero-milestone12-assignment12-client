@@ -35,13 +35,12 @@ const Login = () => {
               reset()
             };
         };
-        console.log(signUpPassErr)
 
 
         const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
         const [signInWithFacebook, fUser, fLoading, fError] = useSignInWithFacebook(auth);
         const [signInWithEmailAndPassword, user,  loading,  error,] = useSignInWithEmailAndPassword(auth);
-        const [createUserWithEmailAndPassword, newUser,  loading2,  error2,] = useCreateUserWithEmailAndPassword(auth);
+        const [createUserWithEmailAndPassword, newUser,  loading2,  error2,] = useCreateUserWithEmailAndPassword(auth,{sendEmailVerification:true});
 
         const [signUpBtn,setSignUpBtn] = useState(false);
 
@@ -52,7 +51,7 @@ const Login = () => {
         if(loading || gLoading || fLoading || loading2){
           return <Loading></Loading>
         }
-        if(gUser || user || newUser){
+        if(gUser || user || newUser || fUser){
           navigate('/');
         }
 
@@ -75,7 +74,7 @@ const Login = () => {
 
                     <button onClick={()=>signInWithGoogle()} className="btn w-[90%] bg-transparent border-gray-300 rounded-sm hover:bg-gray-100 hover:border-gray-300 text-accent justify-start capitalize min-h-[2.6rem] h-[2.6rem]">
                     <img src={google} alt="" width={22} className='mr-8'/>
-                    <p>{(!signUpBtn) ? <span>Sign in</span> : <span>Sign Up</span>} with Google</p>
+                    <p>{(!signUpBtn) ? <span>Log in</span> : <span>Sign Up</span>} with Google</p>
                     </button>
                     {
                       (gError && <span className='text-red-600 text-xs font-semibold'>{gError?.message}</span>)
@@ -83,7 +82,7 @@ const Login = () => {
 
                     <button onClick={()=>signInWithFacebook()} className="btn w-[90%] bg-[#3b5998] border-none rounded-sm hover:bg-[#2f477a] hover:border-gray-300 text-base-100 justify-start capitalize mt-4 mb-5 min-h-[2.6rem] h-[2.6rem]">
                     <img src={facebook} alt="" width={22} className='mr-8'/>
-                    <p>{(!signUpBtn) ? <span>Sign in</span> : <span>Sign Up</span>} with Facebook</p>
+                    <p>{(!signUpBtn) ? <span>Log in</span> : <span>Sign Up</span>} with Facebook</p>
                     </button>
                     {
                       (fError && <span className='text-red-600 text-xs font-semibold'>{fError?.message}</span>)

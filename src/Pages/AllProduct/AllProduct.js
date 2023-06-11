@@ -19,12 +19,9 @@ const AllProduct = () => {
       
         if (error) return 'An error has occurred: ' + error.message
 
-        if(data){
-          console.log(data)
-        }
+
         let categories = [];
-        data.map(product=>categories.indexOf(product.Category) === -1 && categories.push(product.Category))
-        console.log(categories)
+        data.map(product=>categories.indexOf(product.Category) === -1 && categories.push(product.Category));
     return (
       <div>
         <Navbar></Navbar>
@@ -54,7 +51,8 @@ const AllProduct = () => {
                     <div className='w-6 h-[2px] bg-primary'></div>
                   </div>
                   {
-                    categories.map(category=><label className="label justify-start cursor-pointer">
+                    categories.map(category=><label className="label justify-start cursor-pointer"
+                                              key={category}>
                                                 <input type="checkbox"  className="checkbox h-3 w-3 rounded-none mr-3 border-secondary" />
                                                 <span className="label-text text-base text-secondary">{category}</span> 
                                               </label>

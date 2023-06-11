@@ -21,29 +21,52 @@ const NewProduct = () => {
     );
 
 
+
     const navigate = useNavigate();
+
+    const imgStorageKey = "a773558fb8dee1df002efb83e904284c";
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
-        const productSpecObj = JSON.parse(data.SPECIFICATIONS);
-        data.SPECIFICATIONS = productSpecObj;
+        const selectedImg = data.product_img[0];
+        const formData = new FormData();
+        formData.append('image',selectedImg)
+        const imageStorageURL = `https://api.imgbb.com/1/upload?key=${imgStorageKey}`;
+        fetch(imageStorageURL,{
+            method:"POST",
+            body: formData
+        })
+        .then(res=>res.json())
+        .then(result=>{
+            if(result.success){
+                const productImgURL = result.data.url;
 
-        const productFeaturesStr = data.FEATURES;
-        const productFeaturesArr = productFeaturesStr.split(",");
-        data.FEATURES = productFeaturesArr;
 
-        
-        axios.post('http://localhost:5000/new_product',
-            data)
-            .then(function (response) {
-                if(response.data.insertedId){
-                    toast.success("New Product added successfully.");
-                    navigate('/dashboard');
-                };
-              })
-              .catch(function (error) {
-                toast.error(error);
-              });
-    }
+                const productSpecObj = JSON.parse(data.SPECIFICATIONS);
+                data.SPECIFICATIONS = productSpecObj;
+
+                const productFeaturesStr = data.FEATURES;
+                const productFeaturesArr = productFeaturesStr.split(",");
+                data.FEATURES = productFeaturesArr;
+
+                data.Image = productImgURL;
+
+
+                axios.post('http://localhost:5000/new_product',
+                    data)
+                    .then(function (response) {
+                        if(response.data.insertedId){
+                            toast.success("New Product added successfully.");
+                            navigate('/dashboard');
+                        };
+                    })
+                    .catch(function (error) {
+                        toast.error(error);
+                    });
+            }
+        })
+    };
+
+
     return (
         <div className='bg-base-100 my-5 text-left p-5 rounded-sm'>
             <p className='text-neutral font-semibold'>Add Product</p>
@@ -51,12 +74,12 @@ const NewProduct = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
 
 
-
-
                     <input type="email" defaultValue={userEmail} {
                         ...register('userEmail')
                     } className="input input-bordered w-full hidden" />
                   
+
+
                     <label className="label">
                         <span className="label-text-alt font-semibold">Product Model</span>
                     </label>
@@ -71,49 +94,41 @@ const NewProduct = () => {
                     </label>
 
 
-                    <label className="label">
-                        <span className="label-text-alt font-semibold">Product Model ID</span>
-                    </label>
-                    <input type="text" placeholder="Model ID" {...register("MODEL_ID",{
-                        required:{
-                            value:true,
-                            message:'must be filled'
-                        }
-                    })} className="input input-bordered w-full" />
-                    <label className="label">
-                        {errors.MODEL_ID?.type === 'required' && <span className="label-text-alt text-primary">{errors.MODEL_ID.message}</span>}
-                    </label>
 
 
+                    <section className='flex gap-10 items-center'>
 
-                    <section className='productCategory flex items-center'>
+                        <div className='modelId w-1/2'>
+                            <label className="label">
+                                <span className="label-text-alt font-semibold">Product Model ID</span>
+                            </label>
+                            <input type="text" placeholder="Model ID" {...register("MODEL_ID",{
+                                required:{
+                                    value:true,
+                                    message:'must be filled'
+                                }
+                            })} className="input input-bordered w-full" />
+                            <label className="label">
+                                {errors.MODEL_ID?.type === 'required' && <span className="label-text-alt text-primary">{errors.MODEL_ID.message}</span>}
+                            </label>
+
+                        </div>
+
+
                         <div className='selectCategory w-1/2'>
                             <label className="label">
                                 <span className="label-text-alt font-semibold">Product Category</span>
                             </label>
-                            <select className="select select-bordered w-[95%]" {...register("Category",{
+                            <input type="text" placeholder="Category" {...register("Category",{
                                 required:{
                                     value:true,
-                                    message:'select a category'
+                                    message:'must be filled'
                                 }
-                            })}>
-                                {data?.map(c => <option>{c.Category}</option>)};
-                                <option>Custom Category</option>
-
-                            </select>
+                            })} className="input input-bordered w-full" />
                             <label className="label">
                                 {errors.Category?.type === 'required' && <span className="label-text-alt text-primary">{errors.Category.message}</span>}
                             </label>
 
-                        </div>
-                        <div className="customCategory w-1/2">
-                            <input type="text" placeholder="Custom Category" disabled {...register("customCategory",{
-                                required:{
-                                    value:false,
-                                    message:'must be filled'
-                                }
-                            })} className="input input-bordered w-full mt-4" />
-    
                         </div>
                     </section>
 
@@ -166,23 +181,41 @@ const NewProduct = () => {
                         {errors.SPECIFICATIONS?.type === 'required' && <span className="label-text-alt text-primary">{errors.SPECIFICATIONS.message}</span>}
                     </label>
                     
-                    <section>
-                    <label className="label">
-                        <span className="label-text-alt font-semibold">Product MSRP</span>
-                    </label>
-                    <input type="text" defaultValue="$" placeholder="Product MSRP" {...register("MSRP",{
-                        required:{
-                            value:true,
-                            message:'must be filled'
-                        }
-                    })} className="input input-bordered w-full" />
-                    <label className="label">
-                        {errors.MSRP?.type === 'required' && <span className="label-text-alt text-primary">{errors.MSRP.message}</span>}
-                    </label>
-                    
-                    <PrimaryButton type='submit' className='text-2xl'>NEW PRODUCT</PrimaryButton>
- 
+                    <section className='flex gap-x-10'>
+                        <section className='w-1/2'>
+                            <label className="label">
+                                <span className="label-text-alt font-semibold">Product Image</span>
+                            </label>
+                            <input type="file" {...register("product_img",{
+                                required:{
+                                    value:true,
+                                    message:'upload an image'
+                                }
+                            })} className="input input-bordered w-full" />
+                            <label className="label">
+                                {errors.product_img?.type === 'required' && <span className="label-text-alt text-primary">{errors.product_img.message}</span>}
+                            </label>
+
+                        </section>
+
+                        <section className='w-1/2'>
+                            <label className="label">
+                                <span className="label-text-alt font-semibold">Product MSRP</span>
+                            </label>
+                            <input type="text" defaultValue="$" placeholder="Product MSRP" {...register("MSRP",{
+                                required:{
+                                    value:true,
+                                    message:'must be filled'
+                                }
+                            })} className="input input-bordered w-full" />
+                            <label className="label">
+                                {errors.MSRP?.type === 'required' && <span className="label-text-alt text-primary">{errors.MSRP.message}</span>}
+                            </label>
+
+                        </section>
+
                     </section>
+                    <PrimaryButton type='submit' className='text-2xl'>NEW PRODUCT</PrimaryButton>
                 </form>
 
             </section>

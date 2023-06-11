@@ -22,7 +22,7 @@ const EditProduct = () => {
 
 
     const url = `http://localhost:5000/product/edit-product/${id}`
-    const { isLoading, error, data } = useQuery('product', () =>
+    const { isLoading, error, data:product } = useQuery('product', () =>
         fetch(url).then(res =>
         res.json()
         )
@@ -30,35 +30,83 @@ const EditProduct = () => {
 
     if (isLoading) return <Loading></Loading>
       
-    if (error) return 'An error has occurred: ' + error.message
+    if (error) return 'An error has occurred: ' + error.message;
 
-    const product_Id = data._id
+    const product_Id = product._id;
 
-    const onSubmit = data => {
-        
-        const productSpecObj = JSON.parse(data.SPECIFICATIONS);
-        data.SPECIFICATIONS = productSpecObj;
-        
-        const productFeaturesStr = data.FEATURES;
-        const productFeaturesArr = productFeaturesStr.split(",");
-        data.FEATURES = productFeaturesArr;
-        
+    const onSubmit = data => {        
+
+        const imgStorageKey = "a773558fb8dee1df002efb83e904284c";
+
+        const selectedImg = data.product_img[0];
+        // console.log(selectedImg);
+
+        if(selectedImg === undefined){
+            data.Image = product.Image;
+            const productSpecObj = JSON.parse(data.SPECIFICATIONS);
+            data.SPECIFICATIONS = productSpecObj;
+            
+            const productFeaturesStr = data.FEATURES;
+            const productFeaturesArr = productFeaturesStr.split(",");
+            data.FEATURES = productFeaturesArr;
+    
 
 
-        const url = `http://localhost:5000/product/edit-product/${product_Id}`
-        axios.put(url,
-        data)
-        .then(function (response) {
-            if(response.data.acknowledged){
-                toast.success("Product details updated successfully.");
-                navigate('/dashboard');
-            };
-            console.log(response)
-          })
-          .catch(function (error) {
-            // toast.error(error);
-            console.log(error)
-          });
+
+            const url = `http://localhost:5000/product/edit-product/${product_Id}`
+            axios.put(url,
+            data)
+            .then(function (response) {
+                if(response.data.acknowledged){
+                    toast.success("Product details updated successfully.");
+                    navigate('/dashboard');
+                };
+                console.log(response)
+              })
+              .catch(function (error) {
+                toast.error(error);
+              });        
+        }else{
+            const formData = new FormData();
+            formData.append('image',selectedImg)
+            const imageStorageURL = `https://api.imgbb.com/1/upload?key=${imgStorageKey}`;
+            fetch(imageStorageURL,{
+                method:"POST",
+                body: formData
+            })
+            .then(res=>res.json())
+            .then(result=>{
+                if(result.success){
+                    const productImgURL = result.data.url;
+
+                    const productSpecObj = JSON.parse(data.SPECIFICATIONS);
+                    data.SPECIFICATIONS = productSpecObj;
+                    
+                    const productFeaturesStr = data.FEATURES;
+                    const productFeaturesArr = productFeaturesStr.split(",");
+                    data.FEATURES = productFeaturesArr;
+                    
+                    data.Image = productImgURL;
+
+
+                    const url = `http://localhost:5000/product/edit-product/${product_Id}`
+                    axios.put(url,
+                    data)
+                    .then(function (response) {
+                        if(response.data.acknowledged){
+                            toast.success("Product details updated successfully.");
+                            navigate('/dashboard');
+                        };
+                        console.log(response)
+                      })
+                      .catch(function (error) {
+                        // toast.error(error);
+                        console.log(error)
+                      });        
+
+                }
+            });
+        };
 
     };
 
@@ -69,20 +117,36 @@ const EditProduct = () => {
                 <section className='productForm my-5'>
 
 
-                <div>
-                    <img src={data.Image} alt="" width="300"/>
-                </div>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
+
+                        <section className='flex gap-10 items-center'>
+                            
+                            <section className='w-1/3'>
+                                <img src={product.Image} alt="" width="300"/>
+                            </section>
+    
+
+                            <section className=''>
+                                <label className="label">
+                                    <span className="label-text-alt font-semibold">Change Image</span>
+                                </label>
+                                <input type="file" {...register("product_img")} className="input input-bordered w-full" />
+
+                            </section>
+
+                        </section>
 
                         <input type="email" defaultValue={userEmail} {
                             ...register('userEmail')
                         } className="input input-bordered w-full hidden" />
                     
+
+
                         <label className="label">
                             <span className="label-text-alt font-semibold">Product Model</span>
                         </label>
-                        <input type="text" placeholder="Model" defaultValue={data.Model} {...register("Model",{
+                        <input type="text" placeholder="Model" defaultValue={product.Model} {...register("Model",{
                             required:{
                                 value:true,
                                 message:'must be filled'
@@ -93,51 +157,38 @@ const EditProduct = () => {
                         </label>
 
 
-                        <label className="label">
-                            <span className="label-text-alt font-semibold">Product Model ID</span>
-                        </label>
-                        <input type="text" placeholder="Model ID" defaultValue={data.MODEL_ID} {...register("MODEL_ID",{
-                            required:{
-                                value:true,
-                                message:'must be filled'
-                            }
-                        })} className="input input-bordered w-full" />
-                        <label className="label">
-                            {errors.MODEL_ID?.type === 'required' && <span className="label-text-alt text-primary">{errors.MODEL_ID.message}</span>}
-                        </label>
+                        <section className='flex gap-10 items-center'>
 
-
-
-                        <section className='productCategory flex items-center'>
-                            <div className='selectCategory w-1/2'>
+                            <div className='modelId w-1/2'>
                                 <label className="label">
-                                    <span className="label-text-alt font-semibold">Product Category</span>
+                                    <span className="label-text-alt font-semibold">Product Model ID</span>
                                 </label>
-                                <select className="select select-bordered w-[95%]" {...register("Category",{
+                                <input type="text" placeholder="Model ID" defaultValue={product.MODEL_ID} {...register("MODEL_ID",{
                                     required:{
                                         value:true,
-                                        message:'select a category'
+                                        message:'must be filled'
                                     }
-                                })}>
-                                    <option defaultValue={this}>{data.Category}</option>
-                                    <option>Star Wars</option>
-                                    <option>Harry Potter</option>
-                                    <option>Lord of the Rings</option>
-                                    <option>Planet of the Apes</option>
-                                    <option>Custom Category</option>
-                                </select>
+                                })} className="input input-bordered w-full" />
                                 <label className="label">
-                                    {errors.Category?.type === 'required' && <span className="label-text-alt text-primary">{errors.Category.message}</span>}
+                                    {errors.MODEL_ID?.type === 'required' && <span className="label-text-alt text-primary">{errors.MODEL_ID.message}</span>}
                                 </label>
 
                             </div>
-                            <div className="customCategory w-1/2">
-                                <input type="text" placeholder="Custom Category" {...register("customCategory",{
+
+
+                            <div className='category w-1/2'>
+                                <label className="label">
+                                    <span className="label-text-alt font-semibold">Product Category</span>
+                                </label>
+                                <input type="text" placeholder="Category" defaultValue={product.Category} {...register("Category",{
                                     required:{
-                                        value:false,
+                                        value:true,
                                         message:'must be filled'
                                     }
-                                })} className="input input-bordered w-full mt-4" />
+                                })} className="input input-bordered w-full" />
+                                <label className="label">
+                                    {errors.Category?.type === 'required' && <span className="label-text-alt text-primary">{errors.Category.message}</span>}
+                                </label>
 
                             </div>
                         </section>
@@ -147,7 +198,7 @@ const EditProduct = () => {
                         <label className="label">
                             <span className="label-text">Description</span>
                         </label>
-                        <textarea className="textarea textarea-bordered h-40 w-full" defaultValue={data.DESCRIPTION} placeholder="Description" {
+                        <textarea className="textarea textarea-bordered h-40 w-full" defaultValue={product.DESCRIPTION} placeholder="Description" {
                             ...register('DESCRIPTION',{
                                 required:{
                                     value:true,
@@ -163,7 +214,7 @@ const EditProduct = () => {
                         <label className="label">
                             <span className="label-text">Features</span>
                         </label>
-                        <textarea className="textarea textarea-bordered h-40 w-full" defaultValue={data.FEATURES} placeholder="Features" {
+                        <textarea className="textarea textarea-bordered h-40 w-full" defaultValue={product.FEATURES} placeholder="Features" {
                             ...register('FEATURES',{
                                 required:{
                                     value:true,
@@ -179,7 +230,7 @@ const EditProduct = () => {
                         <label className="label">
                             <span className="label-text">Specifications</span>
                         </label>
-                        <textarea className="textarea textarea-bordered h-40 w-full" defaultValue={JSON.stringify(data.SPECIFICATIONS)} placeholder="Specifications" {
+                        <textarea className="textarea textarea-bordered h-40 w-full" defaultValue={JSON.stringify(product.SPECIFICATIONS)} placeholder="Specifications" {
                             ...register('SPECIFICATIONS',{
                                 required:{
                                     value:true,
@@ -195,7 +246,7 @@ const EditProduct = () => {
                         <label className="label">
                             <span className="label-text-alt font-semibold">Product MSRP</span>
                         </label>
-                        <input type="text" defaultValue={data.MSRP} placeholder="Product MSRP" {...register("MSRP",{
+                        <input type="text" defaultValue={product.MSRP} placeholder="Product MSRP" {...register("MSRP",{
                             required:{
                                 value:true,
                                 message:'must be filled'

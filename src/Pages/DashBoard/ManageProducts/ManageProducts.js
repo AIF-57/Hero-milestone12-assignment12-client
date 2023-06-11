@@ -3,16 +3,17 @@ import { useQuery } from 'react-query';
 import ProductHorizontal from './ProductHorizontal';
 import DeleteProductModal from './DeleteProductModal';
 import { toast } from 'react-toastify';
+import Loading from '../../Shared/Loading';
 
 const ManageProducts = () => {
     const [deleteProduct,setDeleteProduct] = useState(null);
-    const { isLoading, error, data } = useQuery('products', () =>
+    const { isLoading, error, data, refetch} = useQuery('products', () =>
     fetch('http://localhost:5000/products').then(res =>
         res.json()
         )
     )
 
-    if (isLoading) return 'Loading...'
+    if (isLoading) return <Loading/>
 
     if (error) return 'An error has occurred: ' + error.message
 
@@ -30,6 +31,7 @@ const ManageProducts = () => {
             .then(feedback=>{
               if(feedback.deletedCount > 0){
                 toast.error("The product has been deleted");
+                refetch();
               };
             });
           };
