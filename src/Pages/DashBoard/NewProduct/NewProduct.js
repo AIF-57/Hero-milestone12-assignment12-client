@@ -13,7 +13,7 @@ const NewProduct = () => {
     const userEmail = user?.email;
 
 
-    const url = `http://localhost:5000/product/categories`
+    const url = `https://mountain-usbl.onrender.com/product/categories`
     const { data } = useQuery('product', () =>
         fetch(url).then(res =>
         res.json()
@@ -57,7 +57,7 @@ const NewProduct = () => {
                 data.Image = productImgURL;
 
 
-                axios.post('http://localhost:5000/new_product',
+                axios.post('https://mountain-usbl.onrender.com/new_product',
                     data)
                     .then(function (response) {
                         if(response.data.insertedId){

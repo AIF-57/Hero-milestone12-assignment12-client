@@ -21,7 +21,7 @@ const EditProduct = () => {
 
 
 
-    const url = `http://localhost:5000/product/edit-product/${id}`
+    const url = `https://mountain-usbl.onrender.com/product/edit-product/${id}`
     const { isLoading, error, data:product } = useQuery('product', () =>
         fetch(url).then(res =>
         res.json()
@@ -63,7 +63,7 @@ const EditProduct = () => {
 
 
 
-            const url = `http://localhost:5000/product/edit-product/${product_Id}`
+            const url = `https://mountain-usbl.onrender.com/product/edit-product/${product_Id}`
             axios.put(url,
             data)
             .then(function (response) {
@@ -100,7 +100,7 @@ const EditProduct = () => {
                     data.Image = productImgURL;
 
 
-                    const url = `http://localhost:5000/product/edit-product/${product_Id}`
+                    const url = `https://mountain-usbl.onrender.com/product/edit-product/${product_Id}`
                     axios.put(url,
                     data)
                     .then(function (response) {

@@ -12,7 +12,7 @@ import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 
 const AllProduct = () => {
         const { isLoading, error, data } = useQuery('products', () =>
-          fetch('http://localhost:5000/products').then(res =>
+          fetch('https://mountain-usbl.onrender.com/products').then(res =>
             res.json()
           )
         )

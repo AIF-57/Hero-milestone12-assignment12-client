@@ -13,7 +13,7 @@ import Loading from '../Shared/Loading';
 const Product = () => {
     const {id} = useParams();
 
-    const url = `http://localhost:5000/product/${id}`
+    const url = `https://mountain-usbl.onrender.com/product/${id}`
     const { isLoading, error, data } = useQuery('product', () =>
         fetch(url).then(res =>
         res.json()

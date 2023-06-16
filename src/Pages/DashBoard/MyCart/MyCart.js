@@ -16,7 +16,7 @@ const MyCart = () => {
 
     // load Cart data
     const { isLoading, error, data:cartItems, refetch} = useQuery('cartItems', () =>
-      fetch('http://localhost:5000/user-orders').then(res =>
+      fetch('https://mountain-usbl.onrender.com/user-orders').then(res =>
         res.json()
       )
     );
@@ -30,7 +30,7 @@ const MyCart = () => {
 
     const handleDeleteItemFromCart = confirmation =>{
       if(confirmation === 'remove'){
-        const url = `http://localhost:5000/user-order/${deleteCartItem}`;
+        const url = `https://mountain-usbl.onrender.com/user-order/${deleteCartItem}`;
         fetch(url,{
           method:'DELETE'
         })
@@ -47,7 +47,7 @@ const MyCart = () => {
     // handlePaymentStatus
     const handlePaymentStatus = id =>{
 
-      const url = `http://localhost:5000/cart_item/${id}`
+      const url = `https://mountain-usbl.onrender.com/cart_item/${id}`
       axios.put(url)
         .then(function (response) {
 

@@ -11,7 +11,7 @@ import { useQuery } from 'react-query';
 
 const ClientsReviews = () => {
   const { isLoading, error, data } = useQuery('testimonials', () =>
-    fetch('http://localhost:5000/testimonials').then(res =>
+    fetch('https://mountain-usbl.onrender.com/testimonials').then(res =>
       res.json()
     )
   )

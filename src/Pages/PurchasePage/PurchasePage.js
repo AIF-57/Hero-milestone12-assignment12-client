@@ -19,7 +19,7 @@ const PurchasePage = () => {
     
         const navigate = useNavigate()
     
-        const url = `http://localhost:5000/product/${id}`
+        const url = `https://mountain-usbl.onrender.com/product/${id}`
         const { isLoading, error, data:product, refetch } = useQuery('product', () =>
             fetch(url).then(res =>
             res.json()
@@ -74,7 +74,7 @@ const PurchasePage = () => {
                     quantity: orderUnit,
                     paymentStatus: 'unpaid'
                 }
-                const url = `http://localhost:5000/order/${id}`
+                const url = `https://mountain-usbl.onrender.com/order/${id}`
                 axios.post(url, {
                     orderDetails
                   })
@@ -82,7 +82,7 @@ const PurchasePage = () => {
                     if(response.data.success){
                         toast("Product added cart successfully !");
 
-                        const url = `http://localhost:5000/product/${id}`
+                        const url = `https://mountain-usbl.onrender.com/product/${id}`
                         axios.put(url,{remainingQuantity})
                           .then(function (response) {
                             console.log(response);
