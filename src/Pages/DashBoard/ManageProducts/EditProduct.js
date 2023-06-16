@@ -34,15 +34,25 @@ const EditProduct = () => {
 
     const product_Id = product._id;
 
-    const onSubmit = data => {        
+    const onSubmit = data => {      
+
+        const productQuantity = isNaN(parseFloat(data.AVAILABILITY));
+        // console.log(productQuantity);
 
         const imgStorageKey = "a773558fb8dee1df002efb83e904284c";
 
         const selectedImg = data.product_img[0];
-        // console.log(selectedImg);
+
+
+        if(!productQuantity){
+            data.Status = 'Available';
+        };
+        
 
         if(selectedImg === undefined){
             data.Image = product.Image;
+
+
             const productSpecObj = JSON.parse(data.SPECIFICATIONS);
             data.SPECIFICATIONS = productSpecObj;
             
@@ -66,7 +76,8 @@ const EditProduct = () => {
               .catch(function (error) {
                 toast.error(error);
               });        
-        }else{
+        }
+        else{
             const formData = new FormData();
             formData.append('image',selectedImg)
             const imageStorageURL = `https://api.imgbb.com/1/upload?key=${imgStorageKey}`;
@@ -120,9 +131,9 @@ const EditProduct = () => {
 
                     <form onSubmit={handleSubmit(onSubmit)}>
 
-                        <section className='flex gap-10 items-center'>
+                        <section className='flex flex-col md:flex-row gap-10 items-center'>
                             
-                            <section className='w-1/3'>
+                            <section className='md:w-1/3'>
                                 <img src={product.Image} alt="" width="300"/>
                             </section>
     
@@ -157,9 +168,9 @@ const EditProduct = () => {
                         </label>
 
 
-                        <section className='flex gap-10 items-center'>
+                        <section className='flex flex-col md:flex-row md:gap-10 items-center'>
 
-                            <div className='modelId w-1/2'>
+                            <div className='modelId w-full md:w-1/2'>
                                 <label className="label">
                                     <span className="label-text-alt font-semibold">Product Model ID</span>
                                 </label>
@@ -176,7 +187,7 @@ const EditProduct = () => {
                             </div>
 
 
-                            <div className='category w-1/2'>
+                            <div className='category w-full md:w-1/2'>
                                 <label className="label">
                                     <span className="label-text-alt font-semibold">Product Category</span>
                                 </label>
@@ -243,18 +254,59 @@ const EditProduct = () => {
                         </label>
                         
 
-                        <label className="label">
-                            <span className="label-text-alt font-semibold">Product MSRP</span>
-                        </label>
-                        <input type="text" defaultValue={product.MSRP} placeholder="Product MSRP" {...register("MSRP",{
-                            required:{
-                                value:true,
-                                message:'must be filled'
-                            }
-                        })} className="input input-bordered w-full" />
-                        <label className="label">
-                            {errors.MSRP?.type === 'required' && <span className="label-text-alt text-primary">{errors.MSRP.message}</span>}
-                        </label>
+
+                        <section className='flex flex-col md:flex-row justify-between md:gap-10'>
+
+                            <div className='AVAILABILITY md:w-1/3'>
+                                <label className="label">
+                                    <span className="label-text-alt font-semibold">Product Availability</span>
+                                </label>
+                                <input type="text" defaultValue={product.AVAILABILITY} placeholder="Product Availability" {...register("AVAILABILITY",{
+                                    required:{
+                                        value:true,
+                                        message:'must be filled'
+                                    }
+                                })} className="input input-bordered w-full" />
+                                <label className="label">
+                                    {errors.AVAILABILITY?.type === 'required' && <span className="label-text-alt text-primary">{errors.AVAILABILITY.message}</span>}
+                                </label>
+                            </div>
+
+
+                            <div className='MinimumOrderUnit md:w-1/3'>
+                                <label className="label">
+                                    <span className="label-text-alt font-semibold">Minimum order unit</span>
+                                </label>
+                                <input type="text" defaultValue={product.Minimum_order_unit} placeholder="Minimum order unit" {...register("MinimumOrderUnit",{
+                                    required:{
+                                        value:true,
+                                        message:'must be filled'
+                                    }
+                                })} className="input input-bordered w-full" />
+                                <label className="label">
+                                    {errors.MinimumOrderUnit?.type === 'required' && <span className="label-text-alt text-primary">{errors.MinimumOrderUnit.message}</span>}
+                                </label>
+                            </div>
+
+
+
+                            <div className='MSRP md:w-1/3'>
+                                <label className="label">
+                                    <span className="label-text-alt font-semibold">Product MSRP</span>
+                                </label>
+                                <input type="text" defaultValue={product.MSRP} placeholder="Product MSRP" {...register("MSRP",{
+                                    required:{
+                                        value:true,
+                                        message:'must be filled'
+                                    }
+                                })} className="input input-bordered w-full" />
+                                <label className="label">
+                                    {errors.MSRP?.type === 'required' && <span className="label-text-alt text-primary">{errors.MSRP.message}</span>}
+                                </label>
+                            </div>
+                        
+                        </section>
+
                         
                         <PrimaryButton type='submit'>Revise Product</PrimaryButton>
                     </form>

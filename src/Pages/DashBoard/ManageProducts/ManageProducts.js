@@ -4,6 +4,7 @@ import ProductHorizontal from './ProductHorizontal';
 import DeleteProductModal from './DeleteProductModal';
 import { toast } from 'react-toastify';
 import Loading from '../../Shared/Loading';
+import axios from 'axios';
 
 const ManageProducts = () => {
     const [deleteProduct,setDeleteProduct] = useState(null);
@@ -20,6 +21,26 @@ const ManageProducts = () => {
     if(data){
     }
 
+
+    // handleProductStatus
+    const handleProductStatus = id =>{
+      console.log(id);
+
+      const url = `http://localhost:5000/manage_product/product/${id}`
+      axios.put(url)
+        .then(function (response) {
+          console.log(response);
+
+          if(response.data.acknowledged){
+            refetch();
+          }
+
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+    }
     const handleDeleteProduct = confirmation =>{
 
         if(confirmation === 'delete'){
@@ -43,6 +64,7 @@ const ManageProducts = () => {
                 data?.map(product => <ProductHorizontal 
                                         key={data._id}
                                         details={product}
+                                        handleProductStatus={handleProductStatus}
                                         setDeleteProduct={setDeleteProduct}></ProductHorizontal>)
             }
             {deleteProduct && <DeleteProductModal handleDeleteProduct={handleDeleteProduct}/>}

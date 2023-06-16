@@ -10,6 +10,8 @@ import ProductGallery from './ProductGallery';
 import Slider from './Slider/Slider';
 
 const Home = () => {
+
+    
     return (
         <div>
             <Navbar></Navbar>

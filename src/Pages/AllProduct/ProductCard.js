@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({details}) => {
     return (
-        <div>
+        <div className='border rounded-sm md:border-none md:rounded-none'>
             <Link to={`/product/${details.MODEL_ID}`}>
                 <div className=" bg-base-100">
-                    <div className='picture h-[400px] w-full flex flex-col justify-center items-center'>
-                        <img src={details.Image} alt="Product" className='w-[80%]'/>
+                    <div className='picture min-h-[300px] md:h-[400px] w-full flex flex-col justify-center items-center'>
+                        <img src={details.Image} alt="Product" className='w-[60%] md:w-[80%]'/>
                     </div>
                     <div className="text-center">
                     <h2 className="text-secondary font-semibold text-lg">{details.Model}</h2>

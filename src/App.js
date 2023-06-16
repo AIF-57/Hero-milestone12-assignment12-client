@@ -15,10 +15,26 @@ import RequireAuth from './Pages/Shared/RequireAuth';
 import MyCart from './Pages/DashBoard/MyCart/MyCart';
 import MyAccount from './Pages/DashBoard/MyAccount/MyAccount';
 import PurchasePage from './Pages/PurchasePage/PurchasePage';
+import Summary from './Pages/DashBoard/Summary/Summary';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './firebase.init';
+import Orders from './Pages/DashBoard/Orders/Orders';
 
 
 
 function App() {
+  const [user, loading] = useAuthState(auth);
+
+
+  const adminEmail = "ariyanislam666@gmail.com";
+  const userEmail = user?.email;
+
+  let admin;
+  if(userEmail === adminEmail){
+    admin = true;
+  }else{
+    admin = false;
+  };
   return (
     <div className="App">
       <Routes>
@@ -28,6 +44,20 @@ function App() {
         <Route path='/purchase/:id' element={<PurchasePage></PurchasePage>}/>
 
         <Route path='/dashboard' element={<RequireAuth><DashBoard></DashBoard></RequireAuth>}>
+        {
+          admin &&           <Route index element={<Summary></Summary>}/>
+        }
+        {
+          admin &&           <Route path='admin_summary' element={<Summary></Summary>}/>
+        }
+
+        {
+          !admin && <Route index element={<RequireAuth><Orders/></RequireAuth>}/>
+        }
+        {
+          !admin && <Route path='user_orders' element={<RequireAuth><Orders/></RequireAuth>}/>
+        }
+
           <Route path='my-cart' element={<RequireAuth><MyCart></MyCart></RequireAuth>}/>
           <Route path='manage_products' element={<ManageProducts></ManageProducts>}/>
           <Route path='new_product' element={<NewProduct></NewProduct>}/>

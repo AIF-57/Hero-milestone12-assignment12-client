@@ -68,7 +68,7 @@ const MyCart = () => {
             <div className="pageHeading py-10">
               {
                 (myItems.length) ? 
-                <p className='text-2xl font-bold'>My Cart ({myItems?.length} items)</p>
+                <p className='text-2xl font-bold'>My Cart ({myItems?.length} item)</p>
                 :
                 <p className='text-2xl font-bold'>Your Shopping Cart is empty!</p>
               }

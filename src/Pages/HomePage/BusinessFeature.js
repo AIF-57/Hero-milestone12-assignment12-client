@@ -4,16 +4,16 @@ import { faTruckFast, faHeadset, faArrowRotateLeft, faCertificate, faDollarSign,
 
 const BusinessFeature = () => {
     return (
-        <div className='max-w-[1280px] mx-auto pb-32'>
+        <div className='max-w-[1280px] mx-auto pb-20 md:pb-32 px-5'>
             <div className="sectionHeading text-left mb-20">
                 <div className="subHeading relative mb-5">
                 <p className='font-semibold tracking-widest text-primary'>Clients Aspect</p>
                 <div className='absolute w-14 h-[2px] bg-primary top-8'></div>
                 </div>
-                <p className='text-5xl font-bold text-secondary'>Business Features</p>
+                <p className='text-3xl md:text-5xl font-bold text-secondary'>Business Features</p>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 px-5 lg:px-10'>
-                <div className="card card-side items-center mx-auto md:mx-0">
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-5 px-5 lg:px-10'>
+                <div className="card card-side items-center md:mx-auto">
                     <figure><FontAwesomeIcon icon={faTruckFast} className='text-6xl text-neutral'/></figure>
                     <div className="card-body p-5 text-left">
                         <h2 className="card-title text-accent font-bold">FREE DELIVERY</h2>
@@ -21,7 +21,7 @@ const BusinessFeature = () => {
                     </div>
                 </div>
 
-                <div className="card card-side bg-base-100 items-center mx-auto md:mx-0">
+                <div className="card card-side bg-base-100 items-center md:mx-auto">
                     <figure><FontAwesomeIcon icon={faHeadset} className='text-6xl text-neutral'/></figure>
                     <div className="card-body lg:p-5 text-left">
                         <h2 className="card-title text-accent font-bold">ONLINE SUPPORT 24/7</h2>
@@ -30,7 +30,7 @@ const BusinessFeature = () => {
                 </div>
 
 
-                <div className="card card-side bg-base-100 items-center mx-auto md:mx-0">
+                <div className="card card-side bg-base-100 items-center md:mx-auto">
                     <figure className='w-20'>
                         <span className='inline-block '><FontAwesomeIcon icon={faArrowRotateLeft} className='text-6xl text-neutral'/></span>
                         <span  className='absolute inline-block top-[42%]'><FontAwesomeIcon icon={faDollarSign} className='text-2xl  text-neutral'/></span>
@@ -42,7 +42,7 @@ const BusinessFeature = () => {
                 </div>
 
 
-                <div className="card card-side bg-base-100 items-center mx-auto md:mx-0">
+                <div className="card card-side bg-base-100 items-center md:mx-auto">
                     <figure>
                         <FontAwesomeIcon icon={faCertificate} className='text-6xl text-neutral'/>
                         <FontAwesomeIcon icon={faPercentage} className='text-2xl text-base-100 absolute'/>

@@ -5,6 +5,8 @@ import Navbar from '../Shared/Navbar';
 import top_BG from '../../utilities/images/products_BG.jpg';
 import Footer from '../Shared/Footer';
 import Loading from '../Shared/Loading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -25,17 +27,17 @@ const AllProduct = () => {
     return (
       <div>
         <Navbar></Navbar>
-        <div className="topImg h-[50vh] flex flex-col justify-center"
+        <div className="topImg h-[30vh] md:h-[50vh] flex flex-col justify-center"
             style={{background:`url(${top_BG})`, position:'center bottom', backgroundSize:'cover', backgroundRepeat:'no-repeat'}}
         >
-          <p className='text-base-100 text-5xl font-bold'>PRODUCT LINE</p>
+          <p className='text-base-100 text-3xl lg:text-5xl font-bold'>PRODUCT LINE</p>
         </div>
         <div className="drawer drawer-mobile h-auto">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col items-center p-10">
-              <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-              <p className='mr-auto text-2xl font-bold text-secondary'>{data.length} PRODUCTS</p>
-              <div className='grid grid-cols-4 gap-10'>
+              <label htmlFor="my-drawer-2" className="btn btn-primary rounded-sm drawer-button mr-auto lg:mr-0 lg:hidden">Filter <FontAwesomeIcon icon={faBarsStaggered}/></label>
+              <p className='mr-auto text-2xl font-bold text-secondary my-10 lg:my-0'>{data.length} PRODUCTS</p>
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10'>
                   {
                     data?.map(product => <ProductCard key={product._id} details={product}></ProductCard>)
                   }

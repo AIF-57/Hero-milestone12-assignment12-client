@@ -18,14 +18,14 @@ import productBG from '../../utilities/images/productBG.png'
 
 const ProductGallery = () => {
     return (
-        <div className='pb-32' style={{background:`url(${productBG})`,position:'center center',backgroundSize:'cover',backgroundRepeat:'no-repeat'}}>
-            <div className=' grid grid-cols-5 gap-2 max-w-[1280px] mx-auto'>
-                <div className="featuredItem col-span-2 bg-stone-100 flex flex-col items-center justify-center">
-                    <p className='text-2xl text-secondary font-semibold'>NEW CONCEPTS</p>
+        <div className='pb-20 px-5 md:pb-32' style={{background:`url(${productBG})`,position:'center center',backgroundSize:'cover',backgroundRepeat:'no-repeat'}}>
+            <div className=' grid grid-cols-5 gap-1 md:gap-2 max-w-[750px] md:max-w-[1280px] mx-auto'>
+                <div className="featuredItem col-span-3 md:col-span-2 bg-stone-100 flex flex-col items-center justify-center py-2 md:px-0">
+                    <p className='text-xl md:text-2xl text-secondary font-semibold'>NEW CONCEPTS</p>
                     <p className='text-lg text-neutral'>Product Line</p>
                     <Link to='/all_products'><PrimaryButton>BROWSE THE COLLECTION</PrimaryButton></Link>
                 </div>
-                <div className="featuredItem border">
+                <div className="featuredItem border hidden md:block">
                     <Link>
                     <img src={galleryImg11} alt="" className='w-full'/>
                     </Link>

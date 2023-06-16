@@ -6,8 +6,8 @@ const Footer = () => {
     return (
       <div>
         <div className='subFooter bg-secondary'>
-          <footer className="footer max-w-[1280px] mx-auto px-20 py-20 text-white grid grid-cols-1 lg:grid-cols-12">
-            <div className='lg:col-span-6'>
+          <footer className="footer max-w-[1280px] mx-auto px-5 md:px-20 py-20 text-white grid grid-cols-2 md:grid-cols-1 lg:grid-cols-12">
+            <div className='col-span-2 lg:col-span-6'>
             <Link to='/' className="btn btn-ghost normal-case text-2xl italic font-extrabold text-base-100 ">Mountain</Link>
             </div> 
             <div className='text-xs'>

@@ -33,7 +33,7 @@ const ClientsReviews = () => {
     };
 
   return (
-    <div className='bg-red-100 py-20'>
+    <div className='bg-red-100 py-10 md:py-20 px-10 xl:px-5'>
 
       <div className='max-w-[1280px] mx-auto'>
         <div className="sectionHeading text-left text-accent">
@@ -41,7 +41,7 @@ const ClientsReviews = () => {
           <p className='font-semibold tracking-widest'>Feedback</p>
           <div className='absolute w-14 h-[2px] bg-primary top-8'></div>
           </div>
-          <p className='text-5xl font-bold'>Testimonials</p>
+          <p className='text-3xl md:text-5xl font-bold'>Testimonials</p>
         </div>
         <Slider {...settings} className='my-20'>
           {

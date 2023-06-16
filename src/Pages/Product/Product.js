@@ -25,7 +25,6 @@ const Product = () => {
     if (error) return 'An error has occurred: ' + error.message
 
     if(data){
-        console.log(data);
     }
 
 
@@ -34,26 +33,31 @@ const Product = () => {
     const specifications = data.SPECIFICATIONS;
 
 
+
+
+
+
     return (
         <div>
             <Navbar></Navbar>
-            <div className="imgGallery h-[75vh] flex justify-center items-center ">
-                <div className="featureImage w-[40%] h-[60%]">
+            <div className="imgGallery min-h-[30vh] md:h-[75vh] flex justify-center items-center ">
+                <div className="featureImage w-[40%] md:h-[60%]">
                     <img src={data.Image} alt="" className='max-h-[400px] mx-auto'/>
                 </div>
             </div>
 
-            <div className="navbar text-neutral-content p-0 bg-secondary">
-                <p className="normal-case text-2xl font-bold text-base-100 px-5">{data.Model}</p>
-                <ul className="menu menu-horizontal ml-auto px-0 text-lg text-stone-400">
-                    <li className='w-36 h-16 flex items-center'><a href='#specifications' className='inline-block h-full'>Specifications</a></li>
-                    <li  className='bg-primary h-16 w-36 text-base-100 flex items-center'><Link to={`/purchase/${id}`} className='inline-block w-full h-full text-center'><FontAwesomeIcon icon={faCartPlus}/></Link></li>
+            <div className="navbar text-neutral-content p-0 bg-secondary grid grid-cols-1 md:flex">
+                <p className=" normal-case text-2xl font-bold text-base-100 px-5 py-2 md:py-0 mx-auto md:mx-0 md:w-1/2">{data.Model}</p>
+                <ul className="w-full md:w-1/2 menu menu-horizontal px-0 text-lg text-stone-400 justify-end">
+                    <li className='w-1/3 md:w-36 h-16 flex items-center justify-center md:hidden border-t md:border-none'><a href='#features' className='inline-block h-full'>Features</a></li>
+                    <li className='w-1/3 md:w-36 h-16 flex items-center justify-center border-t md:border-none'><a href='#specifications' className='inline-block h-full'>Specifications</a></li>
+                    <li className='w-1/3 md:w-36'><button className={`bg-primary h-16 w-full md:w-36 text-base-100 flex items-center ${(data.Status === 'Stock out') && 'btn-disabled bg-gray-300 text-gray-400'}`}><Link to={`/purchase/${id}`} className='inline-block w-full h-full text-center'><FontAwesomeIcon icon={faCartPlus}/></Link></button></li>
                 </ul>
             </div>
 
-            <div className="productInfo max-w-[1280px] mx-auto py-20">
-                <div className="overView flex items-start justify-between py-10">
-                    <div className="description w-[55%] text-left">
+            <div className="productInfo max-w-[1280px] mx-auto py-10 md:py-20 px-5">
+                <div className="overView flex flex-col md:flex-row items-start justify-between py-10">
+                    <div className="description md:w-[55%] text-left">
                         <p className='tracking-widest text-accent font-bold mb-5'>DESCRIPTION</p>
                         <p className='leading-7 text-secondary'>{data.DESCRIPTION}</p>
                         <section className='my-10 grid grid-cols-3'>
@@ -67,7 +71,7 @@ const Product = () => {
                             </div>
                         </section>
                     </div>
-                    <div className="features w-[30%] text-left">
+                    <div id='features' className="features md:w-[30%] text-left">
                         <p className='text-accent font-bold tracking-widest mb-5'>FEATURES</p>
                         {
                             features?.map(feature=><div className='my-2 flex text-secondary'
@@ -78,7 +82,7 @@ const Product = () => {
                         }
                     </div>
                 </div>
-
+            
                 <div id='specifications' className="specifications py-10 border-y border-secondary">
                     <p className='text-left text-4xl font-bold mb-10 to-secondary'>SPECIFICATIONS</p>
                     {
@@ -89,9 +93,9 @@ const Product = () => {
                                                                 </div>)
                     }
                 </div>
-
+            
             </div>
-
+        
             <Footer></Footer>
         </div>
     );

@@ -20,7 +20,7 @@ import sliderImg3 from '../../../utilities/images/sliderImg_3.jpg'
 
 const Slider = () => {
     return (
-      <div className='h-[50vh] lg:h-[90vh]'>
+      <div className='h-[30vh] lg:h-[90vh]'>
         <Swiper
           spaceBetween={0}
           effect={"fade"}
@@ -54,7 +54,7 @@ const Slider = () => {
               <div className="sliderContents h-full text-3xl lg:text-7xl font-bold">
                 <div className="imgArea h-full w-full">
                   <img src={sliderImg} alt="" />
-                    <div className="title absolute left-[25%] top-[50%] w-1/2">
+                    <div className="title absolute left-[25%] top-[30%] lg:top-[50%] w-1/2">
                       <p className='text-base-100'>GO ALL WAYS</p>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ const Slider = () => {
             <div className="sliderContents h-full text-3xl lg:text-7xl font-bold">
               <div className="imgArea h-full w-full relative">
                   <img src={sliderImg2} alt="" />
-                  <div className="title absolute left-[25%] top-[40%] w-1/2 text-base-100">
+                  <div className="title absolute left-[25%] top-[30%] lg:[40%] w-1/2 text-base-100">
                     <p>THIS SHIFTS</p>
                     <p className='my-2'>EVERYTHING</p>  
                   </div>

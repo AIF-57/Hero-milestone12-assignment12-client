@@ -27,6 +27,9 @@ const NewProduct = () => {
     const imgStorageKey = "a773558fb8dee1df002efb83e904284c";
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
+        const productQuantity = isNaN(parseFloat(data.AVAILABILITY));
+
+
         const selectedImg = data.product_img[0];
         const formData = new FormData();
         formData.append('image',selectedImg)
@@ -40,6 +43,9 @@ const NewProduct = () => {
             if(result.success){
                 const productImgURL = result.data.url;
 
+                if(!productQuantity){
+                    data.Status = 'Available';
+                };
 
                 const productSpecObj = JSON.parse(data.SPECIFICATIONS);
                 data.SPECIFICATIONS = productSpecObj;
@@ -96,9 +102,9 @@ const NewProduct = () => {
 
 
 
-                    <section className='flex gap-10 items-center'>
+                    <section className='flex flex-col md:flex-row md:gap-10 items-center'>
 
-                        <div className='modelId w-1/2'>
+                        <div className='modelId w-full md:w-1/2'>
                             <label className="label">
                                 <span className="label-text-alt font-semibold">Product Model ID</span>
                             </label>
@@ -115,7 +121,7 @@ const NewProduct = () => {
                         </div>
 
 
-                        <div className='selectCategory w-1/2'>
+                        <div className='selectCategory w-full md:w-1/2'>
                             <label className="label">
                                 <span className="label-text-alt font-semibold">Product Category</span>
                             </label>
@@ -181,8 +187,11 @@ const NewProduct = () => {
                         {errors.SPECIFICATIONS?.type === 'required' && <span className="label-text-alt text-primary">{errors.SPECIFICATIONS.message}</span>}
                     </label>
                     
-                    <section className='flex gap-x-10'>
-                        <section className='w-1/2'>
+                    
+
+                    <section className='flex flex-col md:flex-row justify-between gap-10'>
+
+                        <div className='w-full md:w-1/2'>
                             <label className="label">
                                 <span className="label-text-alt font-semibold">Product Image</span>
                             </label>
@@ -196,13 +205,48 @@ const NewProduct = () => {
                                 {errors.product_img?.type === 'required' && <span className="label-text-alt text-primary">{errors.product_img.message}</span>}
                             </label>
 
-                        </section>
+                        </div>
 
-                        <section className='w-1/2'>
+
+
+                        <div className='AVAILABILITY w-full md:w-1/3'>
+                            <label className="label">
+                                <span className="label-text-alt font-semibold">Product Availability</span>
+                            </label>
+                            <input type="text" placeholder="Product Availability" {...register("AVAILABILITY",{
+                                required:{
+                                    value:true,
+                                    message:'must be filled'
+                                }
+                            })} className="input input-bordered w-full" />
+                            <label className="label">
+                                {errors.AVAILABILITY?.type === 'required' && <span className="label-text-alt text-primary">{errors.AVAILABILITY.message}</span>}
+                            </label>
+                        </div>
+
+
+                        <div className='MinimumOrderUnit w-full md:w-1/3'>
+                            <label className="label">
+                                <span className="label-text-alt font-semibold">Minimum order unit</span>
+                            </label>
+                            <input type="text" placeholder="Minimum order unit" {...register("MinimumOrderUnit",{
+                                required:{
+                                    value:true,
+                                    message:'must be filled'
+                                }
+                            })} className="input input-bordered w-full" />
+                            <label className="label">
+                                {errors.MinimumOrderUnit?.type === 'required' && <span className="label-text-alt text-primary">{errors.MinimumOrderUnit.message}</span>}
+                            </label>
+                        </div>
+
+
+
+                        <div className='MSRP w-full md:w-1/3'>
                             <label className="label">
                                 <span className="label-text-alt font-semibold">Product MSRP</span>
                             </label>
-                            <input type="text" defaultValue="$" placeholder="Product MSRP" {...register("MSRP",{
+                            <input type="text" placeholder="Product MSRP" {...register("MSRP",{
                                 required:{
                                     value:true,
                                     message:'must be filled'
@@ -211,10 +255,10 @@ const NewProduct = () => {
                             <label className="label">
                                 {errors.MSRP?.type === 'required' && <span className="label-text-alt text-primary">{errors.MSRP.message}</span>}
                             </label>
-
-                        </section>
-
+                        </div>
+                    
                     </section>
+
                     <PrimaryButton type='submit' className='text-2xl'>NEW PRODUCT</PrimaryButton>
                 </form>
 

@@ -15,19 +15,19 @@ const PurchasePage = () => {
         const {id} = useParams();
         const [user] = useAuthState(auth);
 
-
         const customerName = user?.email;
     
         const navigate = useNavigate()
     
         const url = `http://localhost:5000/product/${id}`
-        const { isLoading, error, data:product } = useQuery('product', () =>
+        const { isLoading, error, data:product, refetch } = useQuery('product', () =>
             fetch(url).then(res =>
             res.json()
             )
         );
-        const [orderUnit,setOrderUnit] = useState(parseFloat(product?.Minimum_order_unit));
 
+        const minimumOrderNum = parseFloat(product?.Minimum_order_unit);
+        const [orderUnit,setOrderUnit] = useState(minimumOrderNum);
     
         if (isLoading) return <Loading></Loading>
           
@@ -35,18 +35,25 @@ const PurchasePage = () => {
     
 
 
-    
+        const availability = parseFloat(product.AVAILABILITY - minimumOrderNum);
+
+
+        const remaining = product.AVAILABILITY - orderUnit;
+        let remainingQuantity = remaining.toString();
+        
+        
         // handleOrderUnit
         const handleOrderUnit = (action) =>{
             if(action === "addUnit"){
-                if(orderUnit < parseFloat(product.AVAILABILITY)){
+                if(product.AVAILABILITY > orderUnit){
                     const increaseUnit = orderUnit + 12;
-                    setOrderUnit(increaseUnit);  
+                    setOrderUnit(increaseUnit);
+
                 }else{
                     return orderUnit;
                 };
             }else if(action === "reduceUnit"){
-                if(orderUnit > product.Minimum_order_unit){
+                if(orderUnit > minimumOrderNum){
                     const decreaseUnit = orderUnit - 12;
                     setOrderUnit(decreaseUnit);
                 }else{
@@ -56,9 +63,12 @@ const PurchasePage = () => {
         };
     
         const addToCart = () =>{
+            let today = new Date().toLocaleDateString()
+
 
             if(customerName){
                 const orderDetails = {
+                    date : today,
                     item : product,
                     customerInfo : customerName,
                     quantity: orderUnit,
@@ -71,6 +81,22 @@ const PurchasePage = () => {
                   .then(function (response) {
                     if(response.data.success){
                         toast("Product added cart successfully !");
+
+                        const url = `http://localhost:5000/product/${id}`
+                        axios.put(url,{remainingQuantity})
+                          .then(function (response) {
+                            console.log(response);
+                  
+                            if(response.data.acknowledged){
+                              refetch();
+                            }
+                  
+                          })
+                          .catch(function (error) {
+                            console.log(error);
+                          });
+                  
+
                         navigate('/all_products')
                     }else{
                         toast.error("The product is already added");
@@ -88,17 +114,17 @@ const PurchasePage = () => {
             <div>
                 <Navbar></Navbar>
 
-                <div className='flex flex-col min-h-[80vh] justify-center py-0 max-w-[1000px] mx-auto'>
-                        <div className="grid grid-cols-3 min-h-[40vh] border">
-                            <div className='border flex flex-col justify-center items-center'>
-                                <img src={product.Image} alt={id} width='350'/>
+                <div className='flex flex-col min-h-[80vh] justify-center py-32 md:py-0 max-w-[1000px] mx-auto px-5 xl:px-0'>
+                        <div className="grid col-span-1 md:grid-cols-3 min-h-[40vh] border">
+                            <div className='w-full md:flex md:flex-col justify-center items-center'>
+                                <img src={product.Image} alt={id} className='max-w-[300px] md:w-[350px]'/>
                             </div>
-                            <div className='col-span-2 text-left flex flex-col p-10'>
+                            <div className='md:col-span-2 text-left flex flex-col p-5 md:p-10'>
                                 <p className='text-2xl font-semibold text-secondary'>{product.Model}</p>
                                 <p className='text-neutral font-semibold'>Model id: {product.MODEL_ID}</p>
                                 <div className="availableQuantity w-1/2 my-5">
-                                    <p className='text-accent font-semibold'>Available unit: {product.AVAILABILITY}</p>
-                                    <p className='text-accent font-semibold'>Minimum order unit: {product.Minimum_order_unit}</p>
+                                    <p className='text-accent font-semibold'>Available unit: {availability}</p>
+                                    <p className='text-accent font-semibold'>Minimum order unit: {minimumOrderNum}</p>
 
                                 </div>
                                 <p className='text-4xl text-primary'>{product.MSRP}</p>
