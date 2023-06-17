@@ -6,12 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faSquare } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../Shared/Footer';
 import Loading from '../Shared/Loading';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 
 
 
 const Product = () => {
     const {id} = useParams();
+    const [user] = useAuthState(auth);
 
     const url = `https://mountain-usbl.onrender.com/product/${id}`
     const { isLoading, error, data } = useQuery('product', () =>
@@ -28,6 +31,16 @@ const Product = () => {
     }
 
 
+    
+    const adminEmail = "ariyanislam666@gmail.com";
+    const userEmail = user?.email;
+
+    let admin;
+    if(userEmail === adminEmail){
+      admin = true;
+    }else{
+      admin = false;
+    };
 
     const features = data.FEATURES;
     const specifications = data.SPECIFICATIONS;
@@ -48,11 +61,22 @@ const Product = () => {
 
             <div className="navbar text-neutral-content p-0 bg-secondary grid grid-cols-1 md:flex">
                 <p className=" normal-case text-2xl font-bold text-base-100 px-5 py-2 md:py-0 mx-auto md:mx-0 md:w-1/2">{data.Model}</p>
-                <ul className="w-full md:w-1/2 menu menu-horizontal px-0 text-lg text-stone-400 justify-end">
-                    <li className='w-1/3 md:w-36 h-16 flex items-center justify-center md:hidden border-t md:border-none'><a href='#features' className='inline-block h-full'>Features</a></li>
-                    <li className='w-1/3 md:w-36 h-16 flex items-center justify-center border-t md:border-none'><a href='#specifications' className='inline-block h-full'>Specifications</a></li>
-                    <li className='w-1/3 md:w-36'><button className={`bg-primary h-16 w-full md:w-36 text-base-100 flex items-center ${(data.Status === 'Stock out') && 'btn-disabled bg-gray-300 text-gray-400'}`}><Link to={`/purchase/${id}`} className='inline-block w-full h-full text-center'><FontAwesomeIcon icon={faCartPlus}/></Link></button></li>
-                </ul>
+
+                {
+                    admin ?
+                    <ul className="w-full md:w-1/2 menu menu-horizontal px-0 text-lg text-stone-400 justify-end">
+                        <li className='w-1/3 md:w-36 h-16 flex items-center justify-center md:hidden border-t md:border-none'><a href='#features' className='inline-block h-full'>Features</a></li>
+                        <li className='w-1/3 md:w-36 h-16 flex items-center justify-center border-t md:border-none'><a href='#specifications' className='inline-block h-full'>Specifications</a></li>
+                    </ul>
+
+                    :
+                    <ul className="w-full md:w-1/2 menu menu-horizontal px-0 text-lg text-stone-400 justify-end">
+                        <li className='w-1/3 md:w-36 h-16 flex items-center justify-center md:hidden border-t md:border-none'><a href='#features' className='inline-block h-full'>Features</a></li>
+                        <li className='w-1/3 md:w-36 h-16 flex items-center justify-center border-t md:border-none'><a href='#specifications' className='inline-block h-full'>Specifications</a></li>
+                        <li className='w-1/3 md:w-36'><button className={`bg-primary h-16 w-full md:w-36 text-base-100 flex items-center ${(data.Status === 'Stock out') && 'btn-disabled bg-gray-300 text-gray-400'}`}><Link to={`/purchase/${id}`} className='inline-block w-full h-full text-center'><FontAwesomeIcon icon={faCartPlus}/></Link></button></li>
+                    </ul>
+
+                }
             </div>
 
             <div className="productInfo max-w-[1280px] mx-auto py-10 md:py-20 px-5">
