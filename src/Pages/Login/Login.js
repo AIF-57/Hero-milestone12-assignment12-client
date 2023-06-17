@@ -56,7 +56,7 @@ const Login = () => {
         }
 
     return (
-        <div className='h-screen flex flex-col justify-center' 
+        <div className='h-auto lg:h-screen flex flex-col justify-center py-20 lg:px-0' 
             style={{background:`url(${form_bg})`,backgroundSize:'cover', backgroundPosition:'center'}}
         >
             <div className="loginArea w-[320px] mx-auto shadow-xl">

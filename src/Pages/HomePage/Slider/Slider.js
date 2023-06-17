@@ -20,7 +20,7 @@ import sliderImg3 from '../../../utilities/images/sliderImg_3.jpg'
 
 const Slider = () => {
     return (
-      <div className='h-[30vh] lg:h-[90vh]'>
+      <div className='h-[30vh] md:h-[90vh]'>
         <Swiper
           spaceBetween={0}
           effect={"fade"}
