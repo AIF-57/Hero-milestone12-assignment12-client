@@ -30,7 +30,7 @@ const Orders = () => {
                 (orders.length) ? 
                 <p className='text-2xl font-bold'>My Orders ({orders?.length} item)</p>
                 :
-                <p className='text-2xl font-bold'>Your Shopping Cart is empty!</p>
+                <p className='text-2xl font-bold'>Your has no completed order</p>
                 }
             </div>
 
