@@ -13,7 +13,7 @@ const NewProduct = () => {
     const userEmail = user?.email;
 
 
-    const url = `https://mountain-usbl.onrender.com/product/categories`
+    const url = `http://localhost:5000/product/categories`
     const { data } = useQuery('product', () =>
         fetch(url).then(res =>
         res.json()
@@ -57,7 +57,7 @@ const NewProduct = () => {
                 data.Image = productImgURL;
 
 
-                axios.post('https://mountain-usbl.onrender.com/new_product',
+                axios.post('http://localhost:5000/new_product',
                     data)
                     .then(function (response) {
                         if(response.data.insertedId){
@@ -225,18 +225,18 @@ const NewProduct = () => {
                         </div>
 
 
-                        <div className='MinimumOrderUnit w-full md:w-1/3'>
+                        <div className='Minimum_order_unit w-full md:w-1/3'>
                             <label className="label">
                                 <span className="label-text-alt font-semibold">Minimum order unit</span>
                             </label>
-                            <input type="text" placeholder="Minimum order unit" {...register("MinimumOrderUnit",{
+                            <input type="text" placeholder="Minimum order unit" {...register("Minimum_order_unit",{
                                 required:{
                                     value:true,
                                     message:'must be filled'
                                 }
                             })} className="input input-bordered w-full" />
                             <label className="label">
-                                {errors.MinimumOrderUnit?.type === 'required' && <span className="label-text-alt text-primary">{errors.MinimumOrderUnit.message}</span>}
+                                {errors.Minimum_order_unit?.type === 'required' && <span className="label-text-alt text-primary">{errors.Minimum_order_unit.message}</span>}
                             </label>
                         </div>
 
@@ -246,7 +246,7 @@ const NewProduct = () => {
                             <label className="label">
                                 <span className="label-text-alt font-semibold">Product MSRP</span>
                             </label>
-                            <input type="text" placeholder="Product MSRP" {...register("MSRP",{
+                            <input type="text" defaultValue='$' placeholder="Product MSRP" {...register("MSRP",{
                                 required:{
                                     value:true,
                                     message:'must be filled'

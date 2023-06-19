@@ -10,7 +10,7 @@ const Orders = () => {
 
     const userEmailOrName = user?.email || user?.displayName;
 
-    const url = `https://mountain-usbl.onrender.com/user-orders/${userEmailOrName}` 
+    const url = `http://localhost:5000/user-orders/${userEmailOrName}` 
     const { isLoading, error, data:orders} = useQuery('orders', () =>
         fetch(url).then(res =>
         res.json()

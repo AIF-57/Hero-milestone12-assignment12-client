@@ -6,7 +6,6 @@ const CartItem = ({itemDetail, handlePaymentStatus, setDeleteCartItem}) => {
 
 
 
-
     const itemMSRP = item.MSRP;
     const itemMSRPArr = itemMSRP.split("$");
     const itemMSRPToNumber = parseFloat(itemMSRPArr[1]);

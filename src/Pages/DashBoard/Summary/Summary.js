@@ -3,14 +3,14 @@ import { useQuery } from 'react-query';
 
 const Summary = () => {
     const { isLoading, error, data:products } = useQuery('products', () =>
-    fetch('https://mountain-usbl.onrender.com/products').then(res =>
+    fetch('http://localhost:5000/products').then(res =>
       res.json()
     )
   )
 
     // load Cart data
     const { isLoading2, error2, data:cartItems, refetch} = useQuery('cartItems', () =>
-    fetch('https://mountain-usbl.onrender.com/user-orders').then(res =>
+    fetch('http://localhost:5000/user-orders').then(res =>
       res.json()
     )
   );

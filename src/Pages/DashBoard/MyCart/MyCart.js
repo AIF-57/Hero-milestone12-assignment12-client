@@ -16,7 +16,7 @@ const MyCart = () => {
 
     // load Cart data
     const { isLoading, error, data:cartItems, refetch} = useQuery('cartItems', () =>
-      fetch('https://mountain-usbl.onrender.com/user-orders').then(res =>
+      fetch('http://localhost:5000/user-orders').then(res =>
         res.json()
       )
     );
@@ -30,24 +30,90 @@ const MyCart = () => {
 
     const handleDeleteItemFromCart = confirmation =>{
       if(confirmation === 'remove'){
-        const url = `https://mountain-usbl.onrender.com/user-order/${deleteCartItem}`;
-        fetch(url,{
-          method:'DELETE'
-        })
-        .then(res=>res.json())
-        .then(feedback=>{
-          if(feedback.deletedCount > 0){
-            toast.error("The product has been removed");
-            refetch();
-          };
-        });
+
+        const url = `http://localhost:5000/cart_item/${deleteCartItem}`
+        axios.get(url)
+          .then(function (response) {
+            if (response) {
+              const productId = response.data.orderDetails.item._id;
+              const cartItemOrderedQuantity = response.data.orderDetails.quantity;
+  
+              
+              const url = `http://localhost:5000/product/${productId}`
+              axios.get(url)
+                .then(function (response) {
+                  if(response.data.AVAILABILITY === 'Out of stock'){
+                    let productAvailableQuantity = 0;
+                    const quantity = cartItemOrderedQuantity + productAvailableQuantity;
+                    const remainingQuantity = quantity.toString();
+
+                    const url = `http://localhost:5000/product/${productId}`
+                    axios.put(url,{remainingQuantity})
+                      .then(function (response) {        
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+
+
+
+                      const url2 = `http://localhost:5000/user-order/${deleteCartItem}`;
+                      fetch(url2,{
+                        method:'DELETE'
+                      })
+                      .then(res=>res.json())
+                      .then(feedback=>{
+                        if(feedback.deletedCount > 0){
+                          toast.error("The product has been removed");
+                          refetch();
+                        };
+                      });
+                  }else{
+                    let productAvailableQuantity = parseFloat(response.data.AVAILABILITY);
+                    const quantity = cartItemOrderedQuantity + productAvailableQuantity;
+                    const remainingQuantity = quantity.toString();
+
+                    const url = `http://localhost:5000/product/${productId}`
+                    axios.put(url,{remainingQuantity})
+                      .then(function (response) {        
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+
+
+
+                      const url2 = `http://localhost:5000/user-order/${deleteCartItem}`;
+                      fetch(url2,{
+                        method:'DELETE'
+                      })
+                      .then(res=>res.json())
+                      .then(feedback=>{
+                        if(feedback.deletedCount > 0){
+                          toast.error("The product has been removed");
+                          refetch();
+                        };
+                      });
+                  }
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+
+
       };
     };
 
     // handlePaymentStatus
     const handlePaymentStatus = id =>{
 
-      const url = `https://mountain-usbl.onrender.com/cart_item/${id}`
+      const url = `http://localhost:5000/cart_item/${id}`
       axios.put(url)
         .then(function (response) {
 

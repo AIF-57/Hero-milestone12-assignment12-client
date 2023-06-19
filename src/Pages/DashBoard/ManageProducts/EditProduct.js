@@ -21,7 +21,7 @@ const EditProduct = () => {
 
 
 
-    const url = `https://mountain-usbl.onrender.com/product/edit-product/${id}`
+    const url = `http://localhost:5000/product/edit-product/${id}`
     const { isLoading, error, data:product } = useQuery('product', () =>
         fetch(url).then(res =>
         res.json()
@@ -63,7 +63,7 @@ const EditProduct = () => {
 
 
 
-            const url = `https://mountain-usbl.onrender.com/product/edit-product/${product_Id}`
+            const url = `http://localhost:5000/product/edit-product/${product_Id}`
             axios.put(url,
             data)
             .then(function (response) {
@@ -100,7 +100,7 @@ const EditProduct = () => {
                     data.Image = productImgURL;
 
 
-                    const url = `https://mountain-usbl.onrender.com/product/edit-product/${product_Id}`
+                    const url = `http://localhost:5000/product/edit-product/${product_Id}`
                     axios.put(url,
                     data)
                     .then(function (response) {
@@ -273,18 +273,18 @@ const EditProduct = () => {
                             </div>
 
 
-                            <div className='MinimumOrderUnit md:w-1/3'>
+                            <div className='Minimum_order_unit md:w-1/3'>
                                 <label className="label">
                                     <span className="label-text-alt font-semibold">Minimum order unit</span>
                                 </label>
-                                <input type="text" defaultValue={product.Minimum_order_unit} placeholder="Minimum order unit" {...register("MinimumOrderUnit",{
+                                <input type="text" defaultValue={product.Minimum_order_unit} placeholder="Minimum order unit" {...register("Minimum_order_unit",{
                                     required:{
                                         value:true,
                                         message:'must be filled'
                                     }
                                 })} className="input input-bordered w-full" />
                                 <label className="label">
-                                    {errors.MinimumOrderUnit?.type === 'required' && <span className="label-text-alt text-primary">{errors.MinimumOrderUnit.message}</span>}
+                                    {errors.Minimum_order_unit?.type === 'required' && <span className="label-text-alt text-primary">{errors.Minimum_order_unit.message}</span>}
                                 </label>
                             </div>
 

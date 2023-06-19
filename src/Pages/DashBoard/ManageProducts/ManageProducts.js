@@ -9,7 +9,7 @@ import axios from 'axios';
 const ManageProducts = () => {
     const [deleteProduct,setDeleteProduct] = useState(null);
     const { isLoading, error, data, refetch} = useQuery('products', () =>
-    fetch('https://mountain-usbl.onrender.com/products').then(res =>
+    fetch('http://localhost:5000/products').then(res =>
         res.json()
         )
     )
@@ -26,7 +26,7 @@ const ManageProducts = () => {
     const handleProductStatus = id =>{
       console.log(id);
 
-      const url = `https://mountain-usbl.onrender.com/manage_product/product/${id}`
+      const url = `http://localhost:5000/manage_product/product/${id}`
       axios.put(url)
         .then(function (response) {
           console.log(response);
@@ -44,7 +44,7 @@ const ManageProducts = () => {
     const handleDeleteProduct = confirmation =>{
 
         if(confirmation === 'delete'){
-            const url = `https://mountain-usbl.onrender.com/product/${deleteProduct}`;
+            const url = `http://localhost:5000/product/${deleteProduct}`;
             fetch(url,{
               method:'DELETE'
             })

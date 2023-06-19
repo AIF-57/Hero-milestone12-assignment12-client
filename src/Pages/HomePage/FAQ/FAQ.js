@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 const FAQ = () => {
     const { isLoading, error, data } = useQuery('faqs', () =>
-    fetch('https://mountain-usbl.onrender.com/faqs').then(res =>
+    fetch('http://localhost:5000/faqs').then(res =>
       res.json()
     )
   );

@@ -19,7 +19,7 @@ const PurchasePage = () => {
     
         const navigate = useNavigate()
     
-        const url = `https://mountain-usbl.onrender.com/product/${id}`
+        const url = `http://localhost:5000/product/${id}`
         const { isLoading, error, data:product, refetch } = useQuery('product', () =>
             fetch(url).then(res =>
             res.json()
@@ -46,7 +46,7 @@ const PurchasePage = () => {
         const handleOrderUnit = (action) =>{
             if(action === "addUnit"){
                 if(product.AVAILABILITY > orderUnit){
-                    const increaseUnit = orderUnit + 12;
+                    const increaseUnit = orderUnit + minimumOrderNum;
                     setOrderUnit(increaseUnit);
 
                 }else{
@@ -54,7 +54,7 @@ const PurchasePage = () => {
                 };
             }else if(action === "reduceUnit"){
                 if(orderUnit > minimumOrderNum){
-                    const decreaseUnit = orderUnit - 12;
+                    const decreaseUnit = orderUnit - minimumOrderNum;
                     setOrderUnit(decreaseUnit);
                 }else{
                     return orderUnit;
@@ -62,6 +62,7 @@ const PurchasePage = () => {
             };
         };
     
+
         const addToCart = () =>{
             let today = new Date().toLocaleDateString()
 
@@ -74,27 +75,39 @@ const PurchasePage = () => {
                     quantity: orderUnit,
                     paymentStatus: 'unpaid'
                 }
-                const url = `https://mountain-usbl.onrender.com/order/${id}`
+                const url = `http://localhost:5000/order/${id}`
                 axios.post(url, {
                     orderDetails
                   })
                   .then(function (response) {
                     if(response.data.success){
                         toast("Product added cart successfully !");
+                        if (remaining === 0) {
+                            const url = `http://localhost:5000/manage_product/product/${id}`
+                            axios.put(url)
+                              .then(function (response) {
+                                console.log(response);
+                              })
+                              .catch(function (error) {
+                                console.log(error);
+                              });
+                      
+                        }else{
+                            const url = `http://localhost:5000/product/${id}`
+                            axios.put(url,{remainingQuantity})
+                              .then(function (response) {
+                      
+                                if(response.data.acknowledged){
+                                  refetch();
+                                }
+                      
+                              })
+                              .catch(function (error) {
+                                console.log(error);
+                              });
+    
+                        }
 
-                        const url = `https://mountain-usbl.onrender.com/product/${id}`
-                        axios.put(url,{remainingQuantity})
-                          .then(function (response) {
-                            console.log(response);
-                  
-                            if(response.data.acknowledged){
-                              refetch();
-                            }
-                  
-                          })
-                          .catch(function (error) {
-                            console.log(error);
-                          });
                   
 
                         navigate('/all_products')

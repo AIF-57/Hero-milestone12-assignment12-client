@@ -16,7 +16,7 @@ const Product = () => {
     const {id} = useParams();
     const [user] = useAuthState(auth);
 
-    const url = `https://mountain-usbl.onrender.com/product/${id}`
+    const url = `http://localhost:5000/product/${id}`
     const { isLoading, error, data } = useQuery('product', () =>
         fetch(url).then(res =>
         res.json()
@@ -65,7 +65,7 @@ const Product = () => {
                 {
                     admin ?
                     <ul className="w-full md:w-1/2 menu menu-horizontal px-0 text-lg text-stone-400 justify-end">
-                        <li className='w-1/3 md:w-36 h-16 flex items-center justify-center md:hidden border-t md:border-none'><a href='#features' className='inline-block h-full'>Features</a></li>
+                        <li className='w-1/3 md:w-36 h-16 flex items-center justify-center border-t md:border-none'><a href='#features' className='inline-block h-full'>Features</a></li>
                         <li className='w-1/3 md:w-36 h-16 flex items-center justify-center border-t md:border-none'><a href='#specifications' className='inline-block h-full'>Specifications</a></li>
                     </ul>
 
@@ -73,7 +73,7 @@ const Product = () => {
                     <ul className="w-full md:w-1/2 menu menu-horizontal px-0 text-lg text-stone-400 justify-end">
                         <li className='w-1/3 md:w-36 h-16 flex items-center justify-center md:hidden border-t md:border-none'><a href='#features' className='inline-block h-full'>Features</a></li>
                         <li className='w-1/3 md:w-36 h-16 flex items-center justify-center border-t md:border-none'><a href='#specifications' className='inline-block h-full'>Specifications</a></li>
-                        <li className='w-1/3 md:w-36'><button className={`bg-primary h-16 w-full md:w-36 text-base-100 flex items-center ${(data.Status === 'Stock out') && 'btn-disabled bg-gray-300 text-gray-400'}`}><Link to={`/purchase/${id}`} className='inline-block w-full h-full text-center'><FontAwesomeIcon icon={faCartPlus}/></Link></button></li>
+                        <li className='w-1/3 md:w-36'><button className={`bg-primary h-16 w-full md:w-36 text-base-100 flex items-center ${(data.Status === 'Stock out') && 'btn-disabled bg-gray-300 text-gray-400'}`}><Link to={`/purchase/${data._id}`} className='inline-block w-full h-full text-center'><FontAwesomeIcon icon={faCartPlus}/></Link></button></li>
                     </ul>
 
                 }
